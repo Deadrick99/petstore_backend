@@ -1,0 +1,20 @@
+{
+  "name": "petstore-backend",
+  "version": "1.0.0",
+  "description": "This repo is for the Petstore Rest API backend portion of our SE2 Project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://DD169@bitbucket.org/se2-petstore/petstore-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/se2-petstore/petstore-backend/issues"
+  },
+  "homepage": "https://bitbucket.org/se2-petstore/petstore-backend#readme"
+}
