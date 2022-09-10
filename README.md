@@ -13,11 +13,12 @@ This repo is for the Petstore Rest API backend portion of our SE2 Project.
 
 1. Clone Repo
 2. Run `npm i` to install all dependencies
+3. Run `npm run build` to build the project
 3. Run `npm run start` to start up the server
 
 ### Developer mode:
 
-Run `npm run start-dev` to start the server in watch mode. This will watch the 'src' directory for changes. If a change is detected, it will recompile and restart the server
+Run `npm run dev` to start the server in watch mode. This will watch the 'src' directory for changes, compile, and restart the server. It will not affect the 'build' directory.
 
 ### Participants
 
