@@ -1,0 +1,249 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider = "prisma-zod-generator"
+  output   = "../src/zod/"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model animal {
+  ANIMALID        Decimal           @id
+  NAME            String?
+  CATEGORY        String?
+  BREED           String?
+  DATEBORN        DateTime?
+  GENDER          String?
+  REGISTERED      String?
+  COLOR           String?
+  LISTPRICE       Decimal?          @default(0.0000)
+  PHOTO           Bytes?
+  IMAGEFILE       String?
+  IMAGEHEIGHT     Decimal?
+  IMAGEWIDTH      Decimal?
+  category        category?         @relation(fields: [CATEGORY], references: [CATEGORY], onDelete: Cascade, onUpdate: NoAction)
+  breed           breed?            @relation(fields: [CATEGORY, BREED], references: [CATEGORY, BREED], onDelete: Cascade, onUpdate: NoAction)
+  animalorderitem animalorderitem[]
+  saleanimal      saleanimal[]
+
+  @@index([CATEGORY, BREED], map: "idx_animal_FK_BREEDANIMAL")
+}
+
+model animalorder {
+  ORDERID         Decimal           @id
+  ORDERDATE       DateTime?
+  RECEIVEDATE     DateTime?
+  SUPPLIERID      Decimal?          @default(0)
+  SHIPPINGCOST    Decimal?          @default(0.0000)
+  EMPLOYEEID      Decimal?          @default(0)
+  supplier        supplier?         @relation(fields: [SUPPLIERID], references: [SUPPLIERID], onDelete: Cascade, onUpdate: NoAction)
+  employee        employee?         @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
+  animalorderitem animalorderitem[]
+
+  @@index([SUPPLIERID], map: "idx_animalorder_FK_SUPPLIERANIMALORDER")
+  @@index([EMPLOYEEID], map: "idx_animalorder_FK_EMPLOYEEANIMALORDER")
+}
+
+model animalorderitem {
+  ORDERID     Decimal     @default(0)
+  ANIMALID    Decimal     @default(0)
+  COST        Decimal?    @default(0.0000)
+  animalorder animalorder @relation(fields: [ORDERID], references: [ORDERID], onDelete: Cascade, onUpdate: NoAction)
+  animal      animal      @relation(fields: [ANIMALID], references: [ANIMALID], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([ORDERID, ANIMALID])
+  @@index([ANIMALID], map: "idx_animalorderitem_FK_ANIMALANIMALORDERITEM")
+}
+
+model autonumber {
+  TABLENAME    String @id
+  KEYVALUE     Float?
+  KEYINCREMENT Float? @default(1)
+}
+
+model breed {
+  CATEGORY String
+  BREED    String
+  category category @relation(fields: [CATEGORY], references: [CATEGORY], onDelete: Cascade, onUpdate: NoAction)
+  animal   animal[]
+
+  @@id([CATEGORY, BREED])
+}
+
+model category {
+  CATEGORY     String        @id
+  REGISTRATION String?
+  animal       animal[]
+  breed        breed[]
+  merchandise  merchandise[]
+}
+
+model city {
+  CITYID         Decimal    @id
+  ZIPCODE        String?
+  CITY           String?
+  STATE          String?
+  AREACODE       String?
+  POPULATION1990 Decimal?   @default(0)
+  POPULATION1980 Decimal?   @default(0)
+  COUNTRY        String?    @default("\"USA\"")
+  LATITUDE       Float?     @default(0)
+  LONGITUDE      Float?     @default(0)
+  customer       customer[]
+  employee       employee[]
+  supplier       supplier[]
+}
+
+model customer {
+  CUSTOMERID Decimal  @id
+  PHONE      String?
+  FIRSTNAME  String?
+  LASTNAME   String?
+  ADDRESS    String?
+  ZIPCODE    String?
+  CITYID     Decimal? @default(0)
+  city       city?    @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
+  sale       sale[]
+
+  @@index([CITYID], map: "idx_customer_FK_CITYCUSTOMER")
+}
+
+model customeraccount {
+  ACCOUNTID  Decimal  @id
+  CUSTOMERID Decimal? @default(0)
+  BALANCE    Decimal? @default(0.0000)
+}
+
+model employee {
+  EMPLOYEEID       Decimal            @id
+  LASTNAME         String?
+  FIRSTNAME        String?
+  PHONE            String?
+  ADDRESS          String?
+  ZIPCODE          String?
+  CITYID           Decimal?           @default(0)
+  TAXPAYERID       String?
+  DATEHIRED        DateTime?
+  DATERELEASED     DateTime?
+  MANAGERID        Decimal?           @default(0)
+  EMPLOYEELEVEL    Decimal?           @default(0)
+  TITLE            String?
+  city             city?              @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
+  animalorder      animalorder[]
+  merchandiseorder merchandiseorder[]
+  sale             sale[]
+
+  @@index([CITYID], map: "idx_employee_FK_CITYEMPLOYEE")
+}
+
+model merchandise {
+  ITEMID         Decimal     @id
+  DESCRIPTION    String?
+  QUANTITYONHAND Decimal?    @default(0)
+  LISTPRICE      Decimal?    @default(0.0000)
+  CATEGORY       String?
+  category       category?   @relation(fields: [CATEGORY], references: [CATEGORY], onDelete: Cascade, onUpdate: NoAction)
+  orderitem      orderitem[]
+  saleitem       saleitem[]
+
+  @@index([CATEGORY], map: "idx_merchandise_FK_CATEGORYMERCHANDISE")
+}
+
+model merchandiseorder {
+  PONUMBER     Decimal     @id
+  ORDERDATE    DateTime?
+  RECEIVEDATE  DateTime?
+  SUPPLIERID   Decimal?    @default(0)
+  EMPLOYEEID   Decimal?    @default(0)
+  SHIPPINGCOST Decimal?    @default(0.0000)
+  supplier     supplier?   @relation(fields: [SUPPLIERID], references: [SUPPLIERID], onDelete: Cascade, onUpdate: NoAction)
+  employee     employee?   @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
+  orderitem    orderitem[]
+
+  @@index([SUPPLIERID], map: "idx_merchandiseorder_FK_SUPPLIERORDER")
+  @@index([EMPLOYEEID], map: "idx_merchandiseorder_FK_EMPLOYEEORDER")
+}
+
+model orderitem {
+  PONUMBER         Decimal
+  ITEMID           Decimal
+  QUANTITY         Float?           @default(0)
+  COST             Decimal?         @default(0.0000)
+  merchandiseorder merchandiseorder @relation(fields: [PONUMBER], references: [PONUMBER], onDelete: Cascade, onUpdate: NoAction)
+  merchandise      merchandise      @relation(fields: [ITEMID], references: [ITEMID], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([PONUMBER, ITEMID])
+  @@index([ITEMID], map: "idx_orderitem_FK_MERCHANDISEORDERITEM")
+}
+
+model preferences {
+  KEYID       String  @id
+  VALUE       String?
+  DESCRIPTION String?
+}
+
+model revision {
+  REVISIONID  Decimal   @id
+  VERSION     String?
+  DESCRIPTION String?
+  AUTHOR      String?
+  RELEASEDATE DateTime?
+}
+
+model sale {
+  SALEID     Decimal      @id
+  SALEDATE   DateTime?
+  EMPLOYEEID Decimal?     @default(0)
+  CUSTOMERID Decimal?     @default(0)
+  SALESTAX   Decimal?     @default(0.0000)
+  employee   employee?    @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
+  customer   customer?    @relation(fields: [CUSTOMERID], references: [CUSTOMERID], onDelete: Cascade, onUpdate: NoAction)
+  saleanimal saleanimal[]
+  saleitem   saleitem[]
+
+  @@index([EMPLOYEEID], map: "idx_sale_FK_EMPLOYEESALE")
+  @@index([CUSTOMERID], map: "idx_sale_FK_CUSTOMERSALE")
+}
+
+model saleanimal {
+  SALEID    Decimal  @default(0)
+  ANIMALID  Decimal  @default(0)
+  SALEPRICE Decimal? @default(0.0000)
+  sale      sale     @relation(fields: [SALEID], references: [SALEID], onDelete: Cascade, onUpdate: NoAction)
+  animal    animal   @relation(fields: [ANIMALID], references: [ANIMALID], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([SALEID, ANIMALID])
+  @@index([ANIMALID], map: "idx_saleanimal_FK_ANIMALSALEANIMAL")
+}
+
+model saleitem {
+  SALEID      Decimal
+  ITEMID      Decimal
+  QUANTITY    Decimal?    @default(0)
+  SALEPRICE   Decimal?    @default(0.0000)
+  sale        sale        @relation(fields: [SALEID], references: [SALEID], onDelete: Cascade, onUpdate: NoAction)
+  merchandise merchandise @relation(fields: [ITEMID], references: [ITEMID], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([SALEID, ITEMID])
+  @@index([ITEMID], map: "idx_saleitem_FK_MERCHANDISESALEITEM")
+}
+
+model supplier {
+  SUPPLIERID       Decimal            @id
+  NAME             String?
+  CONTACTNAME      String?
+  PHONE            String?
+  ADDRESS          String?
+  ZIPCODE          String?
+  CITYID           Decimal?           @default(0)
+  city             city?              @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
+  animalorder      animalorder[]
+  merchandiseorder merchandiseorder[]
+
+  @@index([CITYID], map: "idx_supplier_FK_CITYSUPPLIER")
+}

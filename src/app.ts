@@ -1,20 +1,19 @@
 import express from "express";
 const app = express();
 
-const PORT = 3000;
+// Import routes
+import { AnimalsRouter } from "./routes/animals.routes";
 
 // Tell express to parse request body as json
 app.use(express.json());
 
 // Routes
-app.get("/api/test", (req, res) => {
-  res.send({ test: "success" });
+app.get("/api", (req, res) => {
+  res.json({ success: true, up: true });
 });
 
-app.post("/api/test", (req, res) => {
-  const body = req.body;
-  res.send({ received: body });
-});
+app.use("/api/animals/", AnimalsRouter);
 
-// Listen on port
+// Start on port
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server starting on port ${PORT} ...`));
