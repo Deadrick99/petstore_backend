@@ -6,7 +6,7 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.AnimalUncheckedCreateInput> = z
   .object({
-    ANIMALID: z.number(),
+    ANIMALID: z.number().optional(),
     NAME: z.string().optional().nullable(),
     CATEGORY: z.string().optional().nullable(),
     BREED: z.string().optional().nullable(),

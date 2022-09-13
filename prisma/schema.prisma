@@ -13,7 +13,7 @@ datasource db {
 }
 
 model Animal {
-  ANIMALID        Decimal           @id
+  ANIMALID        Int               @id @unique(map: "sqlite_autoindex_Animal_1") @default(autoincrement())
   NAME            String?
   CATEGORY        String?
   BREED           String?
@@ -24,8 +24,8 @@ model Animal {
   LISTPRICE       Decimal?          @default(0.0000)
   PHOTO           Bytes?
   IMAGEFILE       String?
-  IMAGEHEIGHT     Decimal?
-  IMAGEWIDTH      Decimal?
+  IMAGEHEIGHT     Int?
+  IMAGEWIDTH      Int?
   Breed           Breed?            @relation(fields: [CATEGORY, BREED], references: [CATEGORY, BREED], onDelete: Cascade, onUpdate: NoAction)
   Category        Category?         @relation(fields: [CATEGORY], references: [CATEGORY], onDelete: Cascade, onUpdate: NoAction)
   AnimalOrderItem AnimalOrderItem[]
@@ -35,14 +35,14 @@ model Animal {
 }
 
 model AnimalOrder {
-  ORDERID         Decimal           @id
+  ORDERID         Int               @id @unique(map: "sqlite_autoindex_AnimalOrder_1") @default(autoincrement())
   ORDERDATE       DateTime?
   RECEIVEDATE     DateTime?
-  SUPPLIERID      Decimal?          @default(0)
+  SUPPLIERID      Int?              @default(0)
   SHIPPINGCOST    Decimal?          @default(0.0000)
-  EMPLOYEEID      Decimal?          @default(0)
-  Supplier        Supplier?         @relation(fields: [SUPPLIERID], references: [SUPPLIERID], onDelete: Cascade, onUpdate: NoAction)
+  EMPLOYEEID      Int?              @default(0)
   Employee        Employee?         @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
+  Supplier        Supplier?         @relation(fields: [SUPPLIERID], references: [SUPPLIERID], onDelete: Cascade, onUpdate: NoAction)
   AnimalOrderItem AnimalOrderItem[]
 
   @@index([SUPPLIERID], map: "idx_animalorder_FK_SUPPLIERANIMALORDER")
@@ -50,8 +50,8 @@ model AnimalOrder {
 }
 
 model AnimalOrderItem {
-  ORDERID     Decimal     @default(0)
-  ANIMALID    Decimal     @default(0)
+  ORDERID     Int         @default(0)
+  ANIMALID    Int         @default(0)
   COST        Decimal?    @default(0.0000)
   Animal      Animal      @relation(fields: [ANIMALID], references: [ANIMALID], onDelete: Cascade, onUpdate: NoAction)
   AnimalOrder AnimalOrder @relation(fields: [ORDERID], references: [ORDERID], onDelete: Cascade, onUpdate: NoAction)
@@ -84,13 +84,13 @@ model Category {
 }
 
 model City {
-  CITYID         Decimal    @id
+  CITYID         Int        @id @unique(map: "sqlite_autoindex_City_1") @default(autoincrement())
   ZIPCODE        String?
   CITY           String?
   STATE          String?
   AREACODE       String?
-  POPULATION1990 Decimal?   @default(0)
-  POPULATION1980 Decimal?   @default(0)
+  POPULATION1990 Int?       @default(0)
+  POPULATION1980 Int?       @default(0)
   COUNTRY        String?    @default("\"USA\"")
   LATITUDE       Float?     @default(0)
   LONGITUDE      Float?     @default(0)
@@ -100,38 +100,38 @@ model City {
 }
 
 model Customer {
-  CUSTOMERID Decimal  @id
+  CUSTOMERID Int     @id @unique(map: "sqlite_autoindex_Customer_1") @default(autoincrement())
   PHONE      String?
   FIRSTNAME  String?
   LASTNAME   String?
   ADDRESS    String?
   ZIPCODE    String?
-  CITYID     Decimal? @default(0)
-  City       City?    @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
+  CITYID     Int?    @default(0)
+  City       City?   @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
   Sale       Sale[]
 
   @@index([CITYID], map: "idx_customer_FK_CITYCUSTOMER")
 }
 
 model CustomerAccount {
-  ACCOUNTID  Decimal  @id
-  CUSTOMERID Decimal? @default(0)
+  ACCOUNTID  Int      @id @unique(map: "sqlite_autoindex_CustomerAccount_1") @default(autoincrement())
+  CUSTOMERID Int?     @default(0)
   BALANCE    Decimal? @default(0.0000)
 }
 
 model Employee {
-  EMPLOYEEID       Decimal            @id
+  EMPLOYEEID       Int                @id @unique(map: "sqlite_autoindex_Employee_1") @default(autoincrement())
   LASTNAME         String?
   FIRSTNAME        String?
   PHONE            String?
   ADDRESS          String?
   ZIPCODE          String?
-  CITYID           Decimal?           @default(0)
+  CITYID           Int?               @default(0)
   TAXPAYERID       String?
   DATEHIRED        DateTime?
   DATERELEASED     DateTime?
-  MANAGERID        Decimal?           @default(0)
-  EMPLOYEELEVEL    Decimal?           @default(0)
+  MANAGERID        Int?               @default(0)
+  EMPLOYEELEVEL    Int?               @default(0)
   TITLE            String?
   City             City?              @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
   AnimalOrder      AnimalOrder[]
@@ -142,9 +142,9 @@ model Employee {
 }
 
 model Merchandise {
-  ITEMID         Decimal     @id
+  ITEMID         Int         @id @unique(map: "sqlite_autoindex_Merchandise_1") @default(autoincrement())
   DESCRIPTION    String?
-  QUANTITYONHAND Decimal?    @default(0)
+  QUANTITYONHAND Int?        @default(0)
   LISTPRICE      Decimal?    @default(0.0000)
   CATEGORY       String?
   Category       Category?   @relation(fields: [CATEGORY], references: [CATEGORY], onDelete: Cascade, onUpdate: NoAction)
@@ -155,11 +155,11 @@ model Merchandise {
 }
 
 model MerchandiseOrder {
-  PONUMBER     Decimal     @id
+  PONUMBER     Int         @id @unique(map: "sqlite_autoindex_MerchandiseOrder_1") @default(autoincrement())
   ORDERDATE    DateTime?
   RECEIVEDATE  DateTime?
-  SUPPLIERID   Decimal?    @default(0)
-  EMPLOYEEID   Decimal?    @default(0)
+  SUPPLIERID   Int?        @default(0)
+  EMPLOYEEID   Int?        @default(0)
   SHIPPINGCOST Decimal?    @default(0.0000)
   Employee     Employee?   @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
   Supplier     Supplier?   @relation(fields: [SUPPLIERID], references: [SUPPLIERID], onDelete: Cascade, onUpdate: NoAction)
@@ -170,8 +170,8 @@ model MerchandiseOrder {
 }
 
 model OrderItem {
-  PONUMBER         Decimal
-  ITEMID           Decimal
+  PONUMBER         Int
+  ITEMID           Int
   QUANTITY         Float?           @default(0)
   COST             Decimal?         @default(0.0000)
   Merchandise      Merchandise      @relation(fields: [ITEMID], references: [ITEMID], onDelete: Cascade, onUpdate: NoAction)
@@ -188,7 +188,7 @@ model Preferences {
 }
 
 model Revision {
-  REVISIONID  Decimal   @id
+  REVISIONID  Int       @id @unique(map: "sqlite_autoindex_Revision_1") @default(autoincrement())
   VERSION     String?
   DESCRIPTION String?
   AUTHOR      String?
@@ -196,13 +196,13 @@ model Revision {
 }
 
 model Sale {
-  SALEID     Decimal      @id
+  SALEID     Int          @id @unique(map: "sqlite_autoindex_Sale_1") @default(autoincrement())
   SALEDATE   DateTime?
-  EMPLOYEEID Decimal?     @default(0)
-  CUSTOMERID Decimal?     @default(0)
+  EMPLOYEEID Int?         @default(0)
+  CUSTOMERID Int?         @default(0)
   SALESTAX   Decimal?     @default(0.0000)
-  Employee   Employee?    @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
   Customer   Customer?    @relation(fields: [CUSTOMERID], references: [CUSTOMERID], onDelete: Cascade, onUpdate: NoAction)
+  Employee   Employee?    @relation(fields: [EMPLOYEEID], references: [EMPLOYEEID], onDelete: Cascade, onUpdate: NoAction)
   SaleAnimal SaleAnimal[]
   SaleItem   SaleItem[]
 
@@ -211,36 +211,36 @@ model Sale {
 }
 
 model SaleAnimal {
-  SALEID    Decimal  @default(0)
-  ANIMALID  Decimal  @default(0)
+  SALEID    Int      @default(0)
+  ANIMALID  Int      @default(0)
   SALEPRICE Decimal? @default(0.0000)
-  Sale      Sale     @relation(fields: [SALEID], references: [SALEID], onDelete: Cascade, onUpdate: NoAction)
   Animal    Animal   @relation(fields: [ANIMALID], references: [ANIMALID], onDelete: Cascade, onUpdate: NoAction)
+  Sale      Sale     @relation(fields: [SALEID], references: [SALEID], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([SALEID, ANIMALID])
   @@index([ANIMALID], map: "idx_saleanimal_FK_ANIMALSALEANIMAL")
 }
 
 model SaleItem {
-  SALEID      Decimal
-  ITEMID      Decimal
-  QUANTITY    Decimal?    @default(0)
+  SALEID      Int
+  ITEMID      Int
+  QUANTITY    Int?        @default(0)
   SALEPRICE   Decimal?    @default(0.0000)
-  Merchandise Merchandise @relation(fields: [ITEMID], references: [ITEMID], onDelete: Cascade, onUpdate: NoAction)
   Sale        Sale        @relation(fields: [SALEID], references: [SALEID], onDelete: Cascade, onUpdate: NoAction)
+  Merchandise Merchandise @relation(fields: [ITEMID], references: [ITEMID], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([SALEID, ITEMID])
   @@index([ITEMID], map: "idx_saleitem_FK_MERCHANDISESALEITEM")
 }
 
 model Supplier {
-  SUPPLIERID       Decimal            @id
+  SUPPLIERID       Int                @id @unique(map: "sqlite_autoindex_Supplier_1") @default(autoincrement())
   NAME             String?
   CONTACTNAME      String?
   PHONE            String?
   ADDRESS          String?
   ZIPCODE          String?
-  CITYID           Decimal?           @default(0)
+  CITYID           Int?               @default(0)
   City             City?              @relation(fields: [CITYID], references: [CITYID], onDelete: NoAction, onUpdate: NoAction)
   AnimalOrder      AnimalOrder[]
   MerchandiseOrder MerchandiseOrder[]

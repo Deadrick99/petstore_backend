@@ -1,18 +1,12 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.MerchandiseUpdateManyMutationInput> = z
   .object({
-    ITEMID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     DESCRIPTION: z
       .union([
         z.string(),
@@ -23,7 +17,7 @@ const Schema: z.ZodType<Prisma.MerchandiseUpdateManyMutationInput> = z
     QUANTITYONHAND: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 import { MerchandiseUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema } from './MerchandiseUpdateOneRequiredWithoutSaleItemNestedInput.schema';
 
@@ -9,7 +10,7 @@ const Schema: z.ZodType<Prisma.SaleItemUpdateWithoutSaleInput> = z
     QUANTITY: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),

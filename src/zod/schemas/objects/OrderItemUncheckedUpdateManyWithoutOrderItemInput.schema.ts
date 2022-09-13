@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { NullableFloatFieldUpdateOperationsInputObjectSchema } from './NullableFloatFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 
@@ -11,7 +11,7 @@ const Schema: z.ZodType<Prisma.OrderItemUncheckedUpdateManyWithoutOrderItemInput
       PONUMBER: z
         .union([
           z.number(),
-          z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional(),
       QUANTITY: z

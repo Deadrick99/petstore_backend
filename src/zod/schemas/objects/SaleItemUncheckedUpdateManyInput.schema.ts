@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -9,19 +10,19 @@ const Schema: z.ZodType<Prisma.SaleItemUncheckedUpdateManyInput> = z
     SALEID: z
       .union([
         z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     ITEMID: z
       .union([
         z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     QUANTITY: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),

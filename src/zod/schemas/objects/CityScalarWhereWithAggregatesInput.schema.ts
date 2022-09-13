@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { DecimalWithAggregatesFilterObjectSchema } from './DecimalWithAggregatesFilter.schema';
+import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
 import { StringNullableWithAggregatesFilterObjectSchema } from './StringNullableWithAggregatesFilter.schema';
-import { DecimalNullableWithAggregatesFilterObjectSchema } from './DecimalNullableWithAggregatesFilter.schema';
+import { IntNullableWithAggregatesFilterObjectSchema } from './IntNullableWithAggregatesFilter.schema';
 import { FloatNullableWithAggregatesFilterObjectSchema } from './FloatNullableWithAggregatesFilter.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -25,10 +25,7 @@ const Schema: z.ZodType<Prisma.CityScalarWhereWithAggregatesInput> = z
       ])
       .optional(),
     CITYID: z
-      .union([
-        z.lazy(() => DecimalWithAggregatesFilterObjectSchema),
-        z.number(),
-      ])
+      .union([z.lazy(() => IntWithAggregatesFilterObjectSchema), z.number()])
       .optional(),
     ZIPCODE: z
       .union([
@@ -60,14 +57,14 @@ const Schema: z.ZodType<Prisma.CityScalarWhereWithAggregatesInput> = z
       .nullable(),
     POPULATION1990: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()
       .nullable(),
     POPULATION1980: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()

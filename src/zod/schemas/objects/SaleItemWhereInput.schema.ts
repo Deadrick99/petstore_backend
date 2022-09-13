@@ -1,10 +1,11 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
+import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
 import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
-import { MerchandiseRelationFilterObjectSchema } from './MerchandiseRelationFilter.schema';
-import { MerchandiseWhereInputObjectSchema } from './MerchandiseWhereInput.schema';
 import { SaleRelationFilterObjectSchema } from './SaleRelationFilter.schema';
 import { SaleWhereInputObjectSchema } from './SaleWhereInput.schema';
+import { MerchandiseRelationFilterObjectSchema } from './MerchandiseRelationFilter.schema';
+import { MerchandiseWhereInputObjectSchema } from './MerchandiseWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -27,29 +28,29 @@ const Schema: z.ZodType<Prisma.SaleItemWhereInput> = z
       ])
       .optional(),
     SALEID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     ITEMID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     QUANTITY: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     SALEPRICE: z
       .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
-    Merchandise: z
-      .union([
-        z.lazy(() => MerchandiseRelationFilterObjectSchema),
-        z.lazy(() => MerchandiseWhereInputObjectSchema),
-      ])
-      .optional(),
     Sale: z
       .union([
         z.lazy(() => SaleRelationFilterObjectSchema),
         z.lazy(() => SaleWhereInputObjectSchema),
+      ])
+      .optional(),
+    Merchandise: z
+      .union([
+        z.lazy(() => MerchandiseRelationFilterObjectSchema),
+        z.lazy(() => MerchandiseWhereInputObjectSchema),
       ])
       .optional(),
   })

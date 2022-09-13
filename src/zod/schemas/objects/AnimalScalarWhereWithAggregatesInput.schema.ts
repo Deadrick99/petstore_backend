@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { DecimalWithAggregatesFilterObjectSchema } from './DecimalWithAggregatesFilter.schema';
+import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
 import { StringNullableWithAggregatesFilterObjectSchema } from './StringNullableWithAggregatesFilter.schema';
 import { DateTimeNullableWithAggregatesFilterObjectSchema } from './DateTimeNullableWithAggregatesFilter.schema';
 import { DecimalNullableWithAggregatesFilterObjectSchema } from './DecimalNullableWithAggregatesFilter.schema';
 import { BytesNullableWithAggregatesFilterObjectSchema } from './BytesNullableWithAggregatesFilter.schema';
+import { IntNullableWithAggregatesFilterObjectSchema } from './IntNullableWithAggregatesFilter.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -26,10 +27,7 @@ const Schema: z.ZodType<Prisma.AnimalScalarWhereWithAggregatesInput> = z
       ])
       .optional(),
     ANIMALID: z
-      .union([
-        z.lazy(() => DecimalWithAggregatesFilterObjectSchema),
-        z.number(),
-      ])
+      .union([z.lazy(() => IntWithAggregatesFilterObjectSchema), z.number()])
       .optional(),
     NAME: z
       .union([
@@ -100,14 +98,14 @@ const Schema: z.ZodType<Prisma.AnimalScalarWhereWithAggregatesInput> = z
       .nullable(),
     IMAGEHEIGHT: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()
       .nullable(),
     IMAGEWIDTH: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()

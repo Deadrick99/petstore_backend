@@ -8,7 +8,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.EmployeeCreateInput> = z
   .object({
-    EMPLOYEEID: z.number(),
     LASTNAME: z.string().optional().nullable(),
     FIRSTNAME: z.string().optional().nullable(),
     PHONE: z.string().optional().nullable(),

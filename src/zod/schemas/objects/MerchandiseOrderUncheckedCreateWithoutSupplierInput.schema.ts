@@ -6,7 +6,7 @@ import type { Prisma } from '@prisma/client';
 const Schema: z.ZodType<Prisma.MerchandiseOrderUncheckedCreateWithoutSupplierInput> =
   z
     .object({
-      PONUMBER: z.number(),
+      PONUMBER: z.number().optional(),
       ORDERDATE: z.date().optional().nullable(),
       RECEIVEDATE: z.date().optional().nullable(),
       EMPLOYEEID: z.number().optional().nullable(),

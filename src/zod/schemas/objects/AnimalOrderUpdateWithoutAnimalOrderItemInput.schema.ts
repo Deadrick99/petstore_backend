@@ -1,20 +1,13 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
-import { SupplierUpdateOneWithoutAnimalOrderNestedInputObjectSchema } from './SupplierUpdateOneWithoutAnimalOrderNestedInput.schema';
 import { EmployeeUpdateOneWithoutAnimalOrderNestedInputObjectSchema } from './EmployeeUpdateOneWithoutAnimalOrderNestedInput.schema';
+import { SupplierUpdateOneWithoutAnimalOrderNestedInputObjectSchema } from './SupplierUpdateOneWithoutAnimalOrderNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.AnimalOrderUpdateWithoutAnimalOrderItemInput> = z
   .object({
-    ORDERID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     ORDERDATE: z
       .union([
         z.date(),
@@ -36,11 +29,11 @@ const Schema: z.ZodType<Prisma.AnimalOrderUpdateWithoutAnimalOrderItemInput> = z
       ])
       .optional()
       .nullable(),
-    Supplier: z
-      .lazy(() => SupplierUpdateOneWithoutAnimalOrderNestedInputObjectSchema)
-      .optional(),
     Employee: z
       .lazy(() => EmployeeUpdateOneWithoutAnimalOrderNestedInputObjectSchema)
+      .optional(),
+    Supplier: z
+      .lazy(() => SupplierUpdateOneWithoutAnimalOrderNestedInputObjectSchema)
       .optional(),
   })
   .strict();

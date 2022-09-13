@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableFloatFieldUpdateOperationsInputObjectSchema } from './NullableFloatFieldUpdateOperationsInput.schema';
 import { EmployeeUncheckedUpdateManyWithoutCityNestedInputObjectSchema } from './EmployeeUncheckedUpdateManyWithoutCityNestedInput.schema';
 import { SupplierUncheckedUpdateManyWithoutCityNestedInputObjectSchema } from './SupplierUncheckedUpdateManyWithoutCityNestedInput.schema';
@@ -13,7 +13,7 @@ const Schema: z.ZodType<Prisma.CityUncheckedUpdateWithoutCustomerInput> = z
     CITYID: z
       .union([
         z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     ZIPCODE: z
@@ -47,14 +47,14 @@ const Schema: z.ZodType<Prisma.CityUncheckedUpdateWithoutCustomerInput> = z
     POPULATION1990: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),
     POPULATION1980: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),

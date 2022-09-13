@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DecimalWithAggregatesFilterObjectSchema } from './DecimalWithAggregatesFilter.schema';
+import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
 import { DecimalNullableWithAggregatesFilterObjectSchema } from './DecimalNullableWithAggregatesFilter.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -36,16 +36,10 @@ const Schema: z.ZodType<Prisma.AnimalOrderItemScalarWhereWithAggregatesInput> =
         ])
         .optional(),
       ORDERID: z
-        .union([
-          z.lazy(() => DecimalWithAggregatesFilterObjectSchema),
-          z.number(),
-        ])
+        .union([z.lazy(() => IntWithAggregatesFilterObjectSchema), z.number()])
         .optional(),
       ANIMALID: z
-        .union([
-          z.lazy(() => DecimalWithAggregatesFilterObjectSchema),
-          z.number(),
-        ])
+        .union([z.lazy(() => IntWithAggregatesFilterObjectSchema), z.number()])
         .optional(),
       COST: z
         .union([

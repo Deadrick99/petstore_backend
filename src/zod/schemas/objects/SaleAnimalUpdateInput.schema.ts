@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
-import { SaleUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema } from './SaleUpdateOneRequiredWithoutSaleAnimalNestedInput.schema';
 import { AnimalUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema } from './AnimalUpdateOneRequiredWithoutSaleAnimalNestedInput.schema';
+import { SaleUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema } from './SaleUpdateOneRequiredWithoutSaleAnimalNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -14,13 +14,13 @@ const Schema: z.ZodType<Prisma.SaleAnimalUpdateInput> = z
       ])
       .optional()
       .nullable(),
-    Sale: z
-      .lazy(() => SaleUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema)
-      .optional(),
     Animal: z
       .lazy(
         () => AnimalUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema,
       )
+      .optional(),
+    Sale: z
+      .lazy(() => SaleUpdateOneRequiredWithoutSaleAnimalNestedInputObjectSchema)
       .optional(),
   })
   .strict();

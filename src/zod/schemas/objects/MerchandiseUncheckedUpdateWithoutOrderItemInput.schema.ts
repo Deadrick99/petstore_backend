@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 import { SaleItemUncheckedUpdateManyWithoutMerchandiseNestedInputObjectSchema } from './SaleItemUncheckedUpdateManyWithoutMerchandiseNestedInput.schema';
 
@@ -12,7 +13,7 @@ const Schema: z.ZodType<Prisma.MerchandiseUncheckedUpdateWithoutOrderItemInput> 
       ITEMID: z
         .union([
           z.number(),
-          z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional(),
       DESCRIPTION: z
@@ -25,7 +26,7 @@ const Schema: z.ZodType<Prisma.MerchandiseUncheckedUpdateWithoutOrderItemInput> 
       QUANTITYONHAND: z
         .union([
           z.number(),
-          z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional()
         .nullable(),

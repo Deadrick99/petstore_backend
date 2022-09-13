@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
 import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.schema';
 
@@ -24,7 +24,7 @@ const Schema: z.ZodType<Prisma.RevisionWhereInput> = z
       ])
       .optional(),
     REVISIONID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     VERSION: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { MerchandiseOrderUncheckedUpdateManyWithoutEmployeeNestedInputObjectSchema } from './MerchandiseOrderUncheckedUpdateManyWithoutEmployeeNestedInput.schema';
 import { SaleUncheckedUpdateManyWithoutEmployeeNestedInputObjectSchema } from './SaleUncheckedUpdateManyWithoutEmployeeNestedInput.schema';
@@ -14,7 +14,7 @@ const Schema: z.ZodType<Prisma.EmployeeUncheckedUpdateWithoutAnimalOrderInput> =
       EMPLOYEEID: z
         .union([
           z.number(),
-          z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional(),
       LASTNAME: z
@@ -55,7 +55,7 @@ const Schema: z.ZodType<Prisma.EmployeeUncheckedUpdateWithoutAnimalOrderInput> =
       CITYID: z
         .union([
           z.number(),
-          z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional()
         .nullable(),
@@ -83,14 +83,14 @@ const Schema: z.ZodType<Prisma.EmployeeUncheckedUpdateWithoutAnimalOrderInput> =
       MANAGERID: z
         .union([
           z.number(),
-          z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional()
         .nullable(),
       EMPLOYEELEVEL: z
         .union([
           z.number(),
-          z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+          z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
         ])
         .optional()
         .nullable(),

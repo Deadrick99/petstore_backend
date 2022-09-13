@@ -4,7 +4,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CustomerAccountCreateInput> = z
   .object({
-    ACCOUNTID: z.number(),
     CUSTOMERID: z.number().optional().nullable(),
     BALANCE: z.number().optional().nullable(),
   })

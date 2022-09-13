@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
+import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
 import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -24,14 +25,14 @@ const Schema: z.ZodType<Prisma.MerchandiseScalarWhereInput> = z
       ])
       .optional(),
     ITEMID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     DESCRIPTION: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
       .optional()
       .nullable(),
     QUANTITYONHAND: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     LISTPRICE: z

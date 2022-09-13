@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
 import { EmployeeUpdateOneWithoutSaleNestedInputObjectSchema } from './EmployeeUpdateOneWithoutSaleNestedInput.schema';
@@ -10,12 +9,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SaleUpdateWithoutCustomerInput> = z
   .object({
-    SALEID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     SALEDATE: z
       .union([
         z.date(),

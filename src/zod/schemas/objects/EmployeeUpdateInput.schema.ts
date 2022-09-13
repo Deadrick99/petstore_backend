@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
-import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { CityUpdateOneWithoutEmployeeNestedInputObjectSchema } from './CityUpdateOneWithoutEmployeeNestedInput.schema';
 import { AnimalOrderUpdateManyWithoutEmployeeNestedInputObjectSchema } from './AnimalOrderUpdateManyWithoutEmployeeNestedInput.schema';
 import { MerchandiseOrderUpdateManyWithoutEmployeeNestedInputObjectSchema } from './MerchandiseOrderUpdateManyWithoutEmployeeNestedInput.schema';
@@ -12,12 +11,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.EmployeeUpdateInput> = z
   .object({
-    EMPLOYEEID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     LASTNAME: z
       .union([
         z.string(),
@@ -77,14 +70,14 @@ const Schema: z.ZodType<Prisma.EmployeeUpdateInput> = z
     MANAGERID: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),
     EMPLOYEELEVEL: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),

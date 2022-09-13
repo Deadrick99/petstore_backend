@@ -7,7 +7,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SaleCreateWithoutEmployeeInput> = z
   .object({
-    SALEID: z.number(),
     SALEDATE: z.date().optional().nullable(),
     SALESTAX: z.number().optional().nullable(),
     Customer: z

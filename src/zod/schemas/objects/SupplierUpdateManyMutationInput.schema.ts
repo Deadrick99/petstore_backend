@@ -1,17 +1,10 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SupplierUpdateManyMutationInput> = z
   .object({
-    SUPPLIERID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     NAME: z
       .union([
         z.string(),

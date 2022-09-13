@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { NullableIntFieldUpdateOperationsInputObjectSchema } from './NullableIntFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
-import { MerchandiseUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema } from './MerchandiseUpdateOneRequiredWithoutSaleItemNestedInput.schema';
 import { SaleUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema } from './SaleUpdateOneRequiredWithoutSaleItemNestedInput.schema';
+import { MerchandiseUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema } from './MerchandiseUpdateOneRequiredWithoutSaleItemNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -10,7 +11,7 @@ const Schema: z.ZodType<Prisma.SaleItemUpdateInput> = z
     QUANTITY: z
       .union([
         z.number(),
-        z.lazy(() => NullableDecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => NullableIntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional()
       .nullable(),
@@ -21,14 +22,14 @@ const Schema: z.ZodType<Prisma.SaleItemUpdateInput> = z
       ])
       .optional()
       .nullable(),
+    Sale: z
+      .lazy(() => SaleUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema)
+      .optional(),
     Merchandise: z
       .lazy(
         () =>
           MerchandiseUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema,
       )
-      .optional(),
-    Sale: z
-      .lazy(() => SaleUpdateOneRequiredWithoutSaleItemNestedInputObjectSchema)
       .optional(),
   })
   .strict();

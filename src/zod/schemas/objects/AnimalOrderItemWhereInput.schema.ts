@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
 import { AnimalRelationFilterObjectSchema } from './AnimalRelationFilter.schema';
 import { AnimalWhereInputObjectSchema } from './AnimalWhereInput.schema';
@@ -27,10 +27,10 @@ const Schema: z.ZodType<Prisma.AnimalOrderItemWhereInput> = z
       ])
       .optional(),
     ORDERID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     ANIMALID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     COST: z
       .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])

@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { DecimalWithAggregatesFilterObjectSchema } from './DecimalWithAggregatesFilter.schema';
+import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
 import { DateTimeNullableWithAggregatesFilterObjectSchema } from './DateTimeNullableWithAggregatesFilter.schema';
+import { IntNullableWithAggregatesFilterObjectSchema } from './IntNullableWithAggregatesFilter.schema';
 import { DecimalNullableWithAggregatesFilterObjectSchema } from './DecimalNullableWithAggregatesFilter.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -28,10 +29,7 @@ const Schema: z.ZodType<Prisma.AnimalOrderScalarWhereWithAggregatesInput> = z
       ])
       .optional(),
     ORDERID: z
-      .union([
-        z.lazy(() => DecimalWithAggregatesFilterObjectSchema),
-        z.number(),
-      ])
+      .union([z.lazy(() => IntWithAggregatesFilterObjectSchema), z.number()])
       .optional(),
     ORDERDATE: z
       .union([
@@ -49,7 +47,7 @@ const Schema: z.ZodType<Prisma.AnimalOrderScalarWhereWithAggregatesInput> = z
       .nullable(),
     SUPPLIERID: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()
@@ -63,7 +61,7 @@ const Schema: z.ZodType<Prisma.AnimalOrderScalarWhereWithAggregatesInput> = z
       .nullable(),
     EMPLOYEEID: z
       .union([
-        z.lazy(() => DecimalNullableWithAggregatesFilterObjectSchema),
+        z.lazy(() => IntNullableWithAggregatesFilterObjectSchema),
         z.number(),
       ])
       .optional()

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { SortOrderSchema } from '../enums/SortOrder.schema';
-import { SupplierOrderByWithRelationInputObjectSchema } from './SupplierOrderByWithRelationInput.schema';
 import { EmployeeOrderByWithRelationInputObjectSchema } from './EmployeeOrderByWithRelationInput.schema';
+import { SupplierOrderByWithRelationInputObjectSchema } from './SupplierOrderByWithRelationInput.schema';
 import { AnimalOrderItemOrderByRelationAggregateInputObjectSchema } from './AnimalOrderItemOrderByRelationAggregateInput.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -14,11 +14,11 @@ const Schema: z.ZodType<Prisma.AnimalOrderOrderByWithRelationInput> = z
     SUPPLIERID: z.lazy(() => SortOrderSchema).optional(),
     SHIPPINGCOST: z.lazy(() => SortOrderSchema).optional(),
     EMPLOYEEID: z.lazy(() => SortOrderSchema).optional(),
-    Supplier: z
-      .lazy(() => SupplierOrderByWithRelationInputObjectSchema)
-      .optional(),
     Employee: z
       .lazy(() => EmployeeOrderByWithRelationInputObjectSchema)
+      .optional(),
+    Supplier: z
+      .lazy(() => SupplierOrderByWithRelationInputObjectSchema)
       .optional(),
     AnimalOrderItem: z
       .lazy(() => AnimalOrderItemOrderByRelationAggregateInputObjectSchema)

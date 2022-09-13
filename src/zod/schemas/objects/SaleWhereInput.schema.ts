@@ -1,11 +1,12 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.schema';
+import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
 import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
-import { EmployeeRelationFilterObjectSchema } from './EmployeeRelationFilter.schema';
-import { EmployeeWhereInputObjectSchema } from './EmployeeWhereInput.schema';
 import { CustomerRelationFilterObjectSchema } from './CustomerRelationFilter.schema';
 import { CustomerWhereInputObjectSchema } from './CustomerWhereInput.schema';
+import { EmployeeRelationFilterObjectSchema } from './EmployeeRelationFilter.schema';
+import { EmployeeWhereInputObjectSchema } from './EmployeeWhereInput.schema';
 import { SaleAnimalListRelationFilterObjectSchema } from './SaleAnimalListRelationFilter.schema';
 import { SaleItemListRelationFilterObjectSchema } from './SaleItemListRelationFilter.schema';
 
@@ -30,35 +31,35 @@ const Schema: z.ZodType<Prisma.SaleWhereInput> = z
       ])
       .optional(),
     SALEID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     SALEDATE: z
       .union([z.lazy(() => DateTimeNullableFilterObjectSchema), z.date()])
       .optional()
       .nullable(),
     EMPLOYEEID: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     CUSTOMERID: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     SALESTAX: z
       .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
-    Employee: z
-      .union([
-        z.lazy(() => EmployeeRelationFilterObjectSchema),
-        z.lazy(() => EmployeeWhereInputObjectSchema),
-      ])
-      .optional()
-      .nullable(),
     Customer: z
       .union([
         z.lazy(() => CustomerRelationFilterObjectSchema),
         z.lazy(() => CustomerWhereInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
+    Employee: z
+      .union([
+        z.lazy(() => EmployeeRelationFilterObjectSchema),
+        z.lazy(() => EmployeeWhereInputObjectSchema),
       ])
       .optional()
       .nullable(),

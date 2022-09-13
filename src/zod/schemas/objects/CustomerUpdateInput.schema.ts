@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 import { CityUpdateOneWithoutCustomerNestedInputObjectSchema } from './CityUpdateOneWithoutCustomerNestedInput.schema';
 import { SaleUpdateManyWithoutCustomerNestedInputObjectSchema } from './SaleUpdateManyWithoutCustomerNestedInput.schema';
@@ -8,12 +7,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CustomerUpdateInput> = z
   .object({
-    CUSTOMERID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     PHONE: z
       .union([
         z.string(),

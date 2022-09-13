@@ -5,7 +5,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CustomerCreateWithoutSaleInput> = z
   .object({
-    CUSTOMERID: z.number(),
     PHONE: z.string().optional().nullable(),
     FIRSTNAME: z.string().optional().nullable(),
     LASTNAME: z.string().optional().nullable(),

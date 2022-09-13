@@ -4,7 +4,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.RevisionCreateInput> = z
   .object({
-    REVISIONID: z.number(),
     VERSION: z.string().optional().nullable(),
     DESCRIPTION: z.string().optional().nullable(),
     AUTHOR: z.string().optional().nullable(),

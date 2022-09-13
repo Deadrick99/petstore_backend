@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
 import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.schema';
 import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
 import { BytesNullableFilterObjectSchema } from './BytesNullableFilter.schema';
+import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
 import { BreedRelationFilterObjectSchema } from './BreedRelationFilter.schema';
 import { BreedWhereInputObjectSchema } from './BreedWhereInput.schema';
 import { CategoryRelationFilterObjectSchema } from './CategoryRelationFilter.schema';
@@ -32,7 +33,7 @@ const Schema: z.ZodType<Prisma.AnimalWhereInput> = z
       ])
       .optional(),
     ANIMALID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     NAME: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
@@ -75,11 +76,11 @@ const Schema: z.ZodType<Prisma.AnimalWhereInput> = z
       .optional()
       .nullable(),
     IMAGEHEIGHT: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     IMAGEWIDTH: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     Breed: z

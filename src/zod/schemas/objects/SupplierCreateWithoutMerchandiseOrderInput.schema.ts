@@ -6,7 +6,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SupplierCreateWithoutMerchandiseOrderInput> = z
   .object({
-    SUPPLIERID: z.number(),
     NAME: z.string().optional().nullable(),
     CONTACTNAME: z.string().optional().nullable(),
     PHONE: z.string().optional().nullable(),

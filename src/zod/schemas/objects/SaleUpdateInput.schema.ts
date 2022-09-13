@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { NullableDecimalFieldUpdateOperationsInputObjectSchema } from './NullableDecimalFieldUpdateOperationsInput.schema';
-import { EmployeeUpdateOneWithoutSaleNestedInputObjectSchema } from './EmployeeUpdateOneWithoutSaleNestedInput.schema';
 import { CustomerUpdateOneWithoutSaleNestedInputObjectSchema } from './CustomerUpdateOneWithoutSaleNestedInput.schema';
+import { EmployeeUpdateOneWithoutSaleNestedInputObjectSchema } from './EmployeeUpdateOneWithoutSaleNestedInput.schema';
 import { SaleAnimalUpdateManyWithoutSaleNestedInputObjectSchema } from './SaleAnimalUpdateManyWithoutSaleNestedInput.schema';
 import { SaleItemUpdateManyWithoutSaleNestedInputObjectSchema } from './SaleItemUpdateManyWithoutSaleNestedInput.schema';
 
@@ -11,12 +10,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SaleUpdateInput> = z
   .object({
-    SALEID: z
-      .union([
-        z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
     SALEDATE: z
       .union([
         z.date(),
@@ -31,11 +24,11 @@ const Schema: z.ZodType<Prisma.SaleUpdateInput> = z
       ])
       .optional()
       .nullable(),
-    Employee: z
-      .lazy(() => EmployeeUpdateOneWithoutSaleNestedInputObjectSchema)
-      .optional(),
     Customer: z
       .lazy(() => CustomerUpdateOneWithoutSaleNestedInputObjectSchema)
+      .optional(),
+    Employee: z
+      .lazy(() => EmployeeUpdateOneWithoutSaleNestedInputObjectSchema)
       .optional(),
     SaleAnimal: z
       .lazy(() => SaleAnimalUpdateManyWithoutSaleNestedInputObjectSchema)

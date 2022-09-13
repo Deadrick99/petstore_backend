@@ -6,7 +6,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CityCreateWithoutEmployeeInput> = z
   .object({
-    CITYID: z.number(),
     ZIPCODE: z.string().optional().nullable(),
     CITY: z.string().optional().nullable(),
     STATE: z.string().optional().nullable(),

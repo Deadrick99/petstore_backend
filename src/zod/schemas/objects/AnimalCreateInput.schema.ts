@@ -8,7 +8,6 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.AnimalCreateInput> = z
   .object({
-    ANIMALID: z.number(),
     NAME: z.string().optional().nullable(),
     DATEBORN: z.date().optional().nullable(),
     GENDER: z.string().optional().nullable(),

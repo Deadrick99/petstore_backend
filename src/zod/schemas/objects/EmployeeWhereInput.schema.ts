@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { IntFilterObjectSchema } from './IntFilter.schema';
 import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
-import { DecimalNullableFilterObjectSchema } from './DecimalNullableFilter.schema';
+import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
 import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.schema';
 import { CityRelationFilterObjectSchema } from './CityRelationFilter.schema';
 import { CityWhereInputObjectSchema } from './CityWhereInput.schema';
@@ -30,7 +30,7 @@ const Schema: z.ZodType<Prisma.EmployeeWhereInput> = z
       ])
       .optional(),
     EMPLOYEEID: z
-      .union([z.lazy(() => DecimalFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntFilterObjectSchema), z.number()])
       .optional(),
     LASTNAME: z
       .union([z.lazy(() => StringNullableFilterObjectSchema), z.string()])
@@ -53,7 +53,7 @@ const Schema: z.ZodType<Prisma.EmployeeWhereInput> = z
       .optional()
       .nullable(),
     CITYID: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     TAXPAYERID: z
@@ -69,11 +69,11 @@ const Schema: z.ZodType<Prisma.EmployeeWhereInput> = z
       .optional()
       .nullable(),
     MANAGERID: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     EMPLOYEELEVEL: z
-      .union([z.lazy(() => DecimalNullableFilterObjectSchema), z.number()])
+      .union([z.lazy(() => IntNullableFilterObjectSchema), z.number()])
       .optional()
       .nullable(),
     TITLE: z

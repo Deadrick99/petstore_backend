@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { NestedDecimalFilterObjectSchema } from './NestedDecimalFilter.schema';
+import { NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.DecimalFilter> = z
+const Schema: z.ZodType<Prisma.IntFilter> = z
   .object({
     equals: z.number().optional(),
     in: z.number().array().optional(),
@@ -13,9 +13,9 @@ const Schema: z.ZodType<Prisma.DecimalFilter> = z
     gt: z.number().optional(),
     gte: z.number().optional(),
     not: z
-      .union([z.number(), z.lazy(() => NestedDecimalFilterObjectSchema)])
+      .union([z.number(), z.lazy(() => NestedIntFilterObjectSchema)])
       .optional(),
   })
   .strict();
 
-export const DecimalFilterObjectSchema = Schema;
+export const IntFilterObjectSchema = Schema;

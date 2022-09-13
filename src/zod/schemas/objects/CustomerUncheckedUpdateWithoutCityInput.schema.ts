@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
+import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 import { SaleUncheckedUpdateManyWithoutCustomerNestedInputObjectSchema } from './SaleUncheckedUpdateManyWithoutCustomerNestedInput.schema';
 
@@ -10,7 +10,7 @@ const Schema: z.ZodType<Prisma.CustomerUncheckedUpdateWithoutCityInput> = z
     CUSTOMERID: z
       .union([
         z.number(),
-        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     PHONE: z

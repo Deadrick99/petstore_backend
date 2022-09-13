@@ -5,7 +5,7 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.SaleUncheckedCreateWithoutSaleAnimalInput> = z
   .object({
-    SALEID: z.number(),
+    SALEID: z.number().optional(),
     SALEDATE: z.date().optional().nullable(),
     EMPLOYEEID: z.number().optional().nullable(),
     CUSTOMERID: z.number().optional().nullable(),
