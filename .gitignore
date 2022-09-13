@@ -6,7 +6,7 @@
 build/
 
 # Ignore zod schema files, can just generate them
-zod/schemas
+src/zod/
 
 
 # =====
