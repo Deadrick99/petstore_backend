@@ -1,8 +1,16 @@
 import express from "express";
-const app = express();
+import * as dotenv from "dotenv";
 
 // Import routes
-import { AnimalsRouter } from "./routes/animals.routes";
+import { customerRouter } from "./customer/customer.router";
+
+// Setup port
+dotenv.config();
+if (!process.env.PORT) process.exit(1);
+const PORT = parseInt(process.env.PORT as string, 10);
+
+// Setup Express
+const app = express();
 
 // Tell express to parse request body as json
 app.use(express.json());
@@ -12,8 +20,7 @@ app.get("/api", (req, res) => {
   res.json({ success: true, up: true });
 });
 
-app.use("/api/animals/", AnimalsRouter);
+app.use("/api/customers/", customerRouter);
 
-// Start on port
-const PORT = process.env.PORT || 3000;
+// Start server
 app.listen(PORT, () => console.log(`Server starting on port ${PORT} ...`));
