@@ -12,7 +12,7 @@ This repo is for the Petstore Rest API backend portion of our SE2 Project.
 ### How do I get set up?
 
 1. Clone Repo
-2. Run `npm ci` to install all dependencies
+2. Run `npm run init` to install all dependencies and generate files
 3. Run `npm run build` to build the project
 3. Run `npm run start` to start up the server
 

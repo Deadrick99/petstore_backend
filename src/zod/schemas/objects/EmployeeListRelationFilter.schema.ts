@@ -1,13 +1,13 @@
 import { z } from 'zod';
-import { employeeWhereInputObjectSchema } from './employeeWhereInput.schema';
+import { EmployeeWhereInputObjectSchema } from './EmployeeWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.EmployeeListRelationFilter> = z
   .object({
-    every: z.lazy(() => employeeWhereInputObjectSchema).optional(),
-    some: z.lazy(() => employeeWhereInputObjectSchema).optional(),
-    none: z.lazy(() => employeeWhereInputObjectSchema).optional(),
+    every: z.lazy(() => EmployeeWhereInputObjectSchema).optional(),
+    some: z.lazy(() => EmployeeWhereInputObjectSchema).optional(),
+    none: z.lazy(() => EmployeeWhereInputObjectSchema).optional(),
   })
   .strict();
 

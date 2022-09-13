@@ -1,16 +1,16 @@
 import { z } from 'zod';
-import { employeeWhereInputObjectSchema } from './employeeWhereInput.schema';
+import { EmployeeWhereInputObjectSchema } from './EmployeeWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.EmployeeRelationFilter> = z
   .object({
     is: z
-      .lazy(() => employeeWhereInputObjectSchema)
+      .lazy(() => EmployeeWhereInputObjectSchema)
       .optional()
       .nullable(),
     isNot: z
-      .lazy(() => employeeWhereInputObjectSchema)
+      .lazy(() => EmployeeWhereInputObjectSchema)
       .optional()
       .nullable(),
   })

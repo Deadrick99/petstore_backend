@@ -1,16 +1,16 @@
 import { z } from 'zod';
-import { cityWhereInputObjectSchema } from './cityWhereInput.schema';
+import { CityWhereInputObjectSchema } from './CityWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CityRelationFilter> = z
   .object({
     is: z
-      .lazy(() => cityWhereInputObjectSchema)
+      .lazy(() => CityWhereInputObjectSchema)
       .optional()
       .nullable(),
     isNot: z
-      .lazy(() => cityWhereInputObjectSchema)
+      .lazy(() => CityWhereInputObjectSchema)
       .optional()
       .nullable(),
   })

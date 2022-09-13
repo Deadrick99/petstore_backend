@@ -5,6 +5,9 @@
 # Don't include production code, just need src code
 build/
 
+# Ignore zod schema files, can just generate them
+zod/schemas
+
 
 # =====
 # Taken from https://github.com/github/gitignore/blob/main/Node.gitignore

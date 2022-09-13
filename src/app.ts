@@ -2,7 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 
 // Import routes
-import { customerRouter } from "./customer/customer.router";
+import { customerRouter } from "./tables/customer/customer.router";
 
 // Setup port
 dotenv.config();

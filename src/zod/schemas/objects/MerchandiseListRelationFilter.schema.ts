@@ -1,13 +1,13 @@
 import { z } from 'zod';
-import { merchandiseWhereInputObjectSchema } from './merchandiseWhereInput.schema';
+import { MerchandiseWhereInputObjectSchema } from './MerchandiseWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.MerchandiseListRelationFilter> = z
   .object({
-    every: z.lazy(() => merchandiseWhereInputObjectSchema).optional(),
-    some: z.lazy(() => merchandiseWhereInputObjectSchema).optional(),
-    none: z.lazy(() => merchandiseWhereInputObjectSchema).optional(),
+    every: z.lazy(() => MerchandiseWhereInputObjectSchema).optional(),
+    some: z.lazy(() => MerchandiseWhereInputObjectSchema).optional(),
+    none: z.lazy(() => MerchandiseWhereInputObjectSchema).optional(),
   })
   .strict();
 

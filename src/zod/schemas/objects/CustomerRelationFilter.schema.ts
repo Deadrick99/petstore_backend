@@ -1,16 +1,16 @@
 import { z } from 'zod';
-import { customerWhereInputObjectSchema } from './customerWhereInput.schema';
+import { CustomerWhereInputObjectSchema } from './CustomerWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.CustomerRelationFilter> = z
   .object({
     is: z
-      .lazy(() => customerWhereInputObjectSchema)
+      .lazy(() => CustomerWhereInputObjectSchema)
       .optional()
       .nullable(),
     isNot: z
-      .lazy(() => customerWhereInputObjectSchema)
+      .lazy(() => CustomerWhereInputObjectSchema)
       .optional()
       .nullable(),
   })

@@ -1,13 +1,13 @@
 import { z } from 'zod';
-import { animalWhereInputObjectSchema } from './animalWhereInput.schema';
+import { AnimalWhereInputObjectSchema } from './AnimalWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.AnimalListRelationFilter> = z
   .object({
-    every: z.lazy(() => animalWhereInputObjectSchema).optional(),
-    some: z.lazy(() => animalWhereInputObjectSchema).optional(),
-    none: z.lazy(() => animalWhereInputObjectSchema).optional(),
+    every: z.lazy(() => AnimalWhereInputObjectSchema).optional(),
+    some: z.lazy(() => AnimalWhereInputObjectSchema).optional(),
+    none: z.lazy(() => AnimalWhereInputObjectSchema).optional(),
   })
   .strict();
 
