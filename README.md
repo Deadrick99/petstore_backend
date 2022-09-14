@@ -22,4 +22,7 @@ Run `npm run dev` to start the server in watch mode. This will watch the 'src' d
 
 ### Participants
 
-- Dante De La Riva delariva@etsu.edu
+- Dante De La Riva - delariva@etsu.edu
+- William Simmons - simmmonswa@etsu.edu
+- John Serra - serraj@etsu.edu
+- Shay Snyder - snyderse2@etsu.edu
