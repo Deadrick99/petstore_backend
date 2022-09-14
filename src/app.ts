@@ -2,6 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 
 // Import routes
+import { animalRouter } from "./tables/animal/animal.router";
 import { customerRouter } from "./tables/customer/customer.router";
 import { merchandiseRouter } from "./tables/merchandise/merchandise.router";
 
@@ -22,6 +23,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/customers/", customerRouter);
+app.use("/api/animals/", animalRouter);
 app.use("/api/merchandise/", merchandiseRouter);
 
 // Start server
