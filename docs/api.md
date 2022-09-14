@@ -40,24 +40,24 @@ Our application programming interface accomodates a variety of workflows to inte
 
 ### Sale
 
-1)
+1) GET `<API_URL>/api/sale/`: return a list of all sales within the store
 
-2)
+2) GET `<API_URL>/api/sale/:id`: return a specific sale with the specified id number
 
-3)
+3) POST `<API_URL>/api/sale/`: add a new sale to the store's database
 
-4)
+4) PATCH `<API_URL>/api/sale/:id`: update a specific sale's information based on its id number
 
-5)
+5) DELETE `<API_URL>/api/sale/:id`: delete a specific sale from the system based on its id number
 
 ### Supplier
 
-1)
+1) GET `<API_URL>/api/supplier/`: return a list of all suppliers associated with the store
 
-2)
+2) GET `<API_URL>/api/supplier/:id`: return a specific supplier with the specified id number
 
-3)
+3) POST `<API_URL>/api/supplier/`: add a new supplier to the store's database
 
-4)
+4) PATCH `<API_URL>/api/supplier/:id`: update a specific suppliers's information based on its id number
 
-5)
+5) DELETE `<API_URL>/api/supplier/:id`: delete a specific supplier from the system based on its id number
