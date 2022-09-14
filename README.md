@@ -7,14 +7,16 @@ This repo is for the Petstore Rest API backend portion of our SE2 Project.
 - Node.js
 - Typescript
 - Express
-- MySQL
+- SQLite
+- Prisma
+- Zod
 
 ### How do I get set up?
 
 1. Clone Repo
 2. Run `npm run init` to install all dependencies and generate files
 3. Run `npm run build` to build the project
-3. Run `npm run start` to start up the server
+4. Run `npm run start` to start up the server
 
 ### Developer mode:
 
@@ -23,3 +25,6 @@ Run `npm run dev` to start the server in watch mode. This will watch the 'src' d
 ### Participants
 
 - Dante De La Riva delariva@etsu.edu
+- William Simmons Simmonswa@etsu.edu
+- John Serra serraj@etsu.edu
+- Shay Snyder snyderse2@etsu.edu
