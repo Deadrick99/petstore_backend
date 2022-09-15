@@ -14,8 +14,11 @@ This repo is for the Petstore Rest API backend portion of our SE2 Project.
 ## How do I get set up?
 
 ### Clone Repo
+
 Run `npm run init` to install all dependencies and generate files
+
 Run `npm run build` to build the project
+
 Run `npm run start` to start up the server
 
 ### Developer mode:
