@@ -7,7 +7,6 @@ This repo is for the Petstore Rest API backend portion of our SE2 Project.
 - Node.js
 - Typescript
 - Express
-- MySQL
 
 ### How do I get set up?
 
