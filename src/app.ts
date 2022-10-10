@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 
 // Import routes
 import { customerRouter } from "./tables/customer/customer.router";
+import { merchandiseRouter } from "./tables/merchandise/merchandise.router";
 
 // Setup port
 dotenv.config();
@@ -21,6 +22,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/customers/", customerRouter);
+app.use("/api/merchandise/", merchandiseRouter);
 
 // Start server
 app.listen(PORT, () => console.log(`Server starting on port ${PORT} ...`));
