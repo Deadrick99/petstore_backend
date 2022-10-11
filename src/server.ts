@@ -80,8 +80,9 @@ function setupStorage() {
   storage.init({ dir: './.storage'});
 }
 
-function setLoginRoutes() {
-  server.post('/api/login', (req: FastifyRequest, reply: FastifyReply) => {
+
+async function setLoginRoutes() {
+  server.post('/api/login', async (req: FastifyRequest, reply: FastifyReply) => {
     
     let data = { email: '', password: '' };
 
@@ -98,7 +99,7 @@ function setLoginRoutes() {
       return;
     }
 
-    let account = storage.getItem(data.email)
+    let account = await storage.getItem(data.email)
     let correctPassword = account.password;
 
     if (data.password != correctPassword) {
@@ -112,11 +113,26 @@ function setLoginRoutes() {
 
 function setSignupRoutes() {
   server.post('/api/signup', (req: FastifyRequest, reply: FastifyReply) => {
+    let data = { email: '', password: '' };
+
     try {
-      authSchema.parse(req.body);
+      data = authSchema.parse(req.body);
     } catch(error) {
       return formatErrors(req, reply, error);
     }
 
+    let accounts = storage.keys();
+
+    if (accounts.includes(data.email)) {
+      reply.code(400).send('An account associated with this email already exists.');
+      return;
+    }
+
+    let newAccount = {
+      'password': data.password,
+      'token': uuidv4()
+    }
+    storage.setItem(data.email, newAccount);
+    reply.code(200).send('Successfully created the account.');
   });
 }
