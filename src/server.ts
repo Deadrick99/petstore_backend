@@ -102,7 +102,7 @@ function setLoginRoutes() {
     let correctPassword = account.password;
 
     if (data.password != correctPassword) {
-      reply.code(400).send('An account associated with this email was not found.');
+      reply.code(400).send('This password is incorrect.');
       return;
     }
 
