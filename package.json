@@ -24,6 +24,8 @@
     "@prisma/client": "^4.4.0",
     "fastify": "^4.7.0",
     "luxon": "^3.0.4",
+    "node-persist": "^2.1.0",
+    "uuid": "^9.0.0",
     "zod": "^3.19.1"
   }
 }

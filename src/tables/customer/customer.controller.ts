@@ -10,6 +10,7 @@ import {
 
 export async function customerCreateHandler(request: FastifyRequest, reply: FastifyReply) {
   try {
+    console.log(request.body)
     const newCustomer = await customerCreate(request.body);
     return reply.code(201).send(newCustomer);
   } catch (error: any) {
