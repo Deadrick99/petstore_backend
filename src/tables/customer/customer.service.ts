@@ -1,45 +1,63 @@
-import { custom } from "zod";
-import { db } from "../../utils/db.server";
+import prisma from "../../utils/prisma";
+import {
+  customerIdInputSchema,
+  customerManyOutputSchema,
+  customerSingleInputSchema,
+  customerSingleOutputSchema,
+  customerSinglePartialInputSchema,
+} from "./customer.schema";
 
-import * as CustomerTypes from "./customer.types";
+export async function customerCreate(customerDataInput: any) {
+  const customerData = customerSingleInputSchema.parse(customerDataInput);
 
-/** Returns a list of all Customers in the database */
-export const listCustomers = async (): Promise<CustomerTypes.Customer[]> => {
-  return db.customer.findMany();
-};
+  const customer = await prisma.customer.create({
+    data: customerData,
+  });
 
-/** Returns the Customer with given id, or null if no Customer found with given id */
-export const getCustomer = async (id: number): Promise<CustomerTypes.Customer | null> => {
-  return db.customer.findUnique({
+  return customerSingleOutputSchema.parse(customer);
+}
+
+export async function customerGetAll() {
+  const customerList = await prisma.customer.findMany();
+  return customerManyOutputSchema.parse(customerList);
+}
+
+export async function customerGetById(IdInput: any) {
+  const idInput = customerIdInputSchema.parse(IdInput);
+
+  const customer = await prisma.customer.findUniqueOrThrow({
     where: {
-      CUSTOMERID: id,
+      Id: idInput.Id,
     },
   });
-};
 
-/** Returns the Customer with the given parameters, if one matches them */
-export const findCustomer = async (
-  customer: CustomerTypes.FindUnique_Model
-): Promise<CustomerTypes.Customer | null> => {
-  return db.customer.findUnique(customer);
-};
+  console.log(customer);
 
-/** Creates a Customer and returns it with updated id field */
-export const createCustomer = async (newCustomer: CustomerTypes.CreateOne_Model): Promise<CustomerTypes.Customer> => {
-  return db.customer.create(newCustomer);
-};
+  return customerSingleOutputSchema.parse(customer);
+}
 
-/** Updates the Customer with given id with the given data, and returns the modified Customer */
-export const updateCustomer = async (
-  id: number,
-  newCustomer: CustomerTypes.UpdateOne_Model
-): Promise<CustomerTypes.Customer> => {
-  return db.customer.update(newCustomer);
-};
+export async function customerUpdateById(IdInput: any, customerDataInput: any) {
+  const idInput = customerIdInputSchema.parse(IdInput);
+  const customerData = customerSinglePartialInputSchema.parse(customerDataInput);
 
-/** Deletes the Customer with the given id */
-export const deleteCustomer = async (id: number): Promise<void> => {
-  await db.customer.delete({
-    where: { CUSTOMERID: id },
+  const updatedCustomer = await prisma.customer.update({
+    where: {
+      Id: idInput.Id,
+    },
+    data: customerData,
   });
-};
+
+  return customerSingleOutputSchema.parse(updatedCustomer);
+}
+
+export async function customerDeleteById(IdInput: any) {
+  const idInput = customerIdInputSchema.parse(IdInput);
+
+  const customer = await prisma.customer.delete({
+    where: {
+      Id: idInput.Id,
+    },
+  });
+
+  return customerSingleOutputSchema.parse(customer);
+}
