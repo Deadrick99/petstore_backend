@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { zodTypes } from "../../utils/zod";
+import { buildJsonSchemas } from "fastify-zod";
 
 const customerInputCore = {
   FirstName: zodTypes.STR_NON_EMPTY,
@@ -40,3 +41,11 @@ export const customerIdInputSchema = z.object({
   }),
 });
 export type customerIdInputModel = z.infer<typeof customerIdInputSchema>;
+
+export const { schemas: customerSchemas, $ref } = buildJsonSchemas({
+  customerSingleInputSchema,
+  customerSinglePartialInputSchema,
+  customerSingleOutputSchema,
+  customerManyOutputSchema,
+  customerIdInputSchema,
+});

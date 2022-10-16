@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { formatErrors } from "../../utils/errorFormatting";
+import { customerSingleInputModel } from "./customer.schema";
 import {
   customerCreate,
   customerDeleteById,
@@ -8,7 +9,12 @@ import {
   customerUpdateById,
 } from "./customer.service";
 
-export async function customerCreateHandler(request: FastifyRequest, reply: FastifyReply) {
+export async function customerCreateHandler(
+  request: FastifyRequest<{
+    Body: customerSingleInputModel;
+  }>,
+  reply: FastifyReply
+) {
   try {
     const newCustomer = await customerCreate(request.body);
     return reply.code(201).send(newCustomer);

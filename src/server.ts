@@ -5,11 +5,13 @@ import * as dotenv from "dotenv";
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
 
+import { customerSchemas } from "./tables/customer/customer.schema";
+
 const server: FastifyInstance = fastify();
 
 main();
 
-async function main() {
+function main() {
   try {
     setupServer();
     setServerRoutes();
@@ -22,12 +24,19 @@ async function main() {
 
 function setupServer() {
   setupCors();
+  setupSchemas();
 }
 
 async function setupCors() {
   await server.register(cors, {
     origin: ["localhost"],
   });
+}
+
+function setupSchemas() {
+  for (const schema of customerSchemas) {
+    server.addSchema(schema);
+  }
 }
 
 function extractServerOptions(): { port: number; host: string } {
