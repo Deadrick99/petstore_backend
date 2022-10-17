@@ -4,21 +4,21 @@ import { extendApi, generateSchema } from "@anatine/zod-openapi";
 
 const cityInputCore = {
   Name: extendApi(zodTypes.STR_NON_EMPTY(), { example: "Albuquerque" }),
-  State: extendApi(zodTypes.STR_NON_EMPTY().length(2, "State must be the two letter abbreviation for the State name"), {
+  State: extendApi(zodTypes.STR_NON_EMPTY().length(2, "This must be the two letter abbreviation for the State name"), {
     example: "NM",
   }),
   Country: extendApi(
     zodTypes
       .STR_NON_EMPTY()
-      .min(2, "Country must be the two or three letter abbreviation for the Country name")
-      .max(3, "Country must be the two or three letter abbreviation for the Country name"),
+      .min(2, "This must be the two or three letter abbreviation for the Country name")
+      .max(3, "This must be the two or three letter abbreviation for the Country name"),
     { example: "USA" }
   ),
   ZipCode: extendApi(zodTypes.ZIP_CODE_STR().nullable().optional(), { example: "87101" }),
   AreaCode: extendApi(
     zodTypes
       .STR_NON_EMPTY()
-      .regex(/^\d{3}$/, "Must be a valid three digit Area Code")
+      .regex(/^\d{3}$/, "This must be a valid three digit Area Code")
       .nullable()
       .optional(),
     { example: "123" }
@@ -55,10 +55,8 @@ const citySingleOutputSchema = z.object({
 const cityManyOutputSchema = z.array(citySingleOutputSchema);
 
 const cityIdInputSchema = z.object({
-  Id: extendApi(zodTypes.INT_STR(), {
-    description: "A number (as a string) uniquely identifying the City",
-  }).transform((str) => {
-    return parseInt(str);
+  Id: extendApi(zodTypes.INT(), {
+    description: "A number uniquely identifying the City",
   }),
 });
 

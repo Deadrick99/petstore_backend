@@ -29,7 +29,7 @@ export const customerSwaggerRouteInfos = {
 
   getById: {
     schema: {
-      summary: "Get Customers by Id",
+      summary: "Get Customer by Id",
       description: "Get the Customer with the given Id",
       tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,
@@ -42,7 +42,7 @@ export const customerSwaggerRouteInfos = {
 
   UpdateById: {
     schema: {
-      summary: "Update Customers by Id",
+      summary: "Update Customer by Id",
       description: "Update the data for the Customer with the given Id",
       tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,
@@ -56,7 +56,7 @@ export const customerSwaggerRouteInfos = {
 
   DeleteById: {
     schema: {
-      summary: "Delete Customers by Id",
+      summary: "Delete Customer by Id",
       description: "Delete the Customer with the given Id",
       tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,

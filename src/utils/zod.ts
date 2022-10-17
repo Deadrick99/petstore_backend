@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { DateTime } from "luxon";
 import { extendApi } from "@anatine/zod-openapi";
+import { Decimal } from "@prisma/client/runtime";
 
 export const STR = () => {
   return z
@@ -20,6 +21,17 @@ export const NUM = () => {
     required_error: "This is required",
     invalid_type_error: "This must be a number",
   });
+};
+
+export const DECIMAL_TO_NUM = () => {
+  return z
+    .any()
+    .refine((data: any) => {
+      return data instanceof Decimal;
+    }, "This must be a Prisma.Decimal object")
+    .transform((decimal: Decimal) => {
+      return decimal.toNumber();
+    });
 };
 
 export const NUM_STR = () => {
@@ -62,6 +74,12 @@ export const DATE_STR = () => {
   );
 };
 
+export const DATE_TO_STR = () => {
+  return z.date().transform((date) => {
+    return DateTime.fromJSDate(date).toISO();
+  });
+};
+
 export const PHONE_STR = () => {
   return extendApi(
     STR().regex(/^(\([0-9]{3}\)[ ]?)?[0-9]{3}[- ]?[0-9]{4,6}$/, {
@@ -88,8 +106,10 @@ export const zodTypes = {
   INT,
   INT_STR,
   NUM,
+  DECIMAL_TO_NUM,
   NUM_STR,
   DATE_STR,
+  DATE_TO_STR,
   PHONE_STR,
   ZIP_CODE_STR,
 };

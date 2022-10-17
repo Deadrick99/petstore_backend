@@ -26,8 +26,6 @@ export const customerService = {
       },
     });
 
-    console.log(customer);
-
     return customerSchemas.SingleOutput.parse(customer);
   },
 
@@ -48,12 +46,12 @@ export const customerService = {
   deleteById: async (IdInput: any) => {
     const idInput = customerSchemas.IdInput.parse(IdInput);
 
-    const customer = await prisma.customer.delete({
+    const customerOld = await prisma.customer.delete({
       where: {
         Id: idInput.Id,
       },
     });
 
-    return customerSchemas.SingleOutput.parse(customer);
+    return customerSchemas.SingleOutput.parse(customerOld);
   },
 };

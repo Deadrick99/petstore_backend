@@ -29,7 +29,7 @@ export const citySwaggerRouteInfos = {
 
   getById: {
     schema: {
-      summary: "Get Cities by Id",
+      summary: "Get City by Id",
       description: "Get the City with the given Id",
       tags: ["City"],
       params: citySwaggerDefinitions.IdInput,
@@ -42,7 +42,7 @@ export const citySwaggerRouteInfos = {
 
   UpdateById: {
     schema: {
-      summary: "Update Cities by Id",
+      summary: "Update City by Id",
       description: "Update the data for the City with the given Id",
       tags: ["City"],
       params: citySwaggerDefinitions.IdInput,
@@ -56,7 +56,7 @@ export const citySwaggerRouteInfos = {
 
   DeleteById: {
     schema: {
-      summary: "Delete Cities by Id",
+      summary: "Delete City by Id",
       description: "Delete the City with the given Id",
       tags: ["City"],
       params: citySwaggerDefinitions.IdInput,

@@ -12,7 +12,7 @@ const customerInputCore = {
   }),
   Address: extendApi(zodTypes.STR_NON_EMPTY().nullable().optional(), { example: "123 Main St." }),
   ZipCode: zodTypes.ZIP_CODE_STR().nullable().optional(),
-  CityId: zodTypes.INT().nullable().optional(),
+  CityId: extendApi(zodTypes.INT().nullable().optional(), { description: "Must be in the Cities endpoint" }),
 };
 
 const customerOutputCore = {
@@ -38,10 +38,8 @@ const customerSingleOutputSchema = z.object({
 const customerManyOutputSchema = z.array(customerSingleOutputSchema);
 
 const customerIdInputSchema = z.object({
-  Id: extendApi(zodTypes.INT_STR(), {
-    description: "A number (as a string) uniquely identifying the Customer",
-  }).transform((str) => {
-    return parseInt(str);
+  Id: extendApi(zodTypes.INT(), {
+    description: "A number uniquely identifying the Customer",
   }),
 });
 

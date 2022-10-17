@@ -1,12 +1,12 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { formatErrors } from "../../utils/errorFormatting";
-import { cityService } from "./city.service";
+import { animalService } from "./animal.service";
 
-export const cityHandlers = {
+export const animalHandlers = {
   create: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const cityNew = await cityService.create(request.body);
-      return reply.code(201).send(cityNew);
+      const animalNew = await animalService.create(request.body);
+      return reply.code(201).send(animalNew);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -14,8 +14,8 @@ export const cityHandlers = {
 
   getAll: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const cityList = await cityService.getAll();
-      return reply.code(200).send(cityList);
+      const animalList = await animalService.getAll();
+      return reply.code(200).send(animalList);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -23,8 +23,8 @@ export const cityHandlers = {
 
   getById: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const city = await cityService.getById(request.params);
-      return reply.code(200).send(city);
+      const animal = await animalService.getById(request.params);
+      return reply.code(200).send(animal);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -32,8 +32,8 @@ export const cityHandlers = {
 
   updateById: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const cityNew = await cityService.updateById(request.params, request.body);
-      return reply.code(200).send(cityNew);
+      const animalNew = await animalService.updateById(request.params, request.body);
+      return reply.code(200).send(animalNew);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -41,8 +41,8 @@ export const cityHandlers = {
 
   deleteById: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const cityOld = await cityService.deleteById(request.params);
-      return reply.code(200).send(cityOld);
+      const animalOld = await animalService.deleteById(request.params);
+      return reply.code(200).send(animalOld);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }

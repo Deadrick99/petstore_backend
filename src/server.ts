@@ -4,9 +4,11 @@ import swagger from "@fastify/swagger";
 import swagger_ui from "@fastify/swagger-ui";
 import * as dotenv from "dotenv";
 
+import { swagger_info, swagger_ui_info } from "./utils/swagger";
+
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
-import { swagger_info, swagger_ui_info } from "./utils/swagger";
+import animalRoutes from "./tables/animal/animal.route";
 
 const server: FastifyInstance = fastify();
 
@@ -63,6 +65,7 @@ function setServerRoutes() {
   // CRUD endpoints
   server.register(customerRoutes, { prefix: "/api/customers" });
   server.register(cityRoutes, { prefix: "/api/cities" });
+  server.register(animalRoutes, { prefix: "/api/animals" });
 }
 
 async function serverRun() {

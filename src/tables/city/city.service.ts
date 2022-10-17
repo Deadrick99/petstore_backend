@@ -26,8 +26,6 @@ export const cityService = {
       },
     });
 
-    console.log(city);
-
     return citySchemas.SingleOutput.parse(city);
   },
 
@@ -35,25 +33,25 @@ export const cityService = {
     const idInput = citySchemas.IdInput.parse(IdInput);
     const cityData = citySchemas.SinglePartialInput.parse(cityDataInput);
 
-    const updatedCity = await prisma.city.update({
+    const cityNew = await prisma.city.update({
       where: {
         Id: idInput.Id,
       },
       data: cityData,
     });
 
-    return citySchemas.SingleOutput.parse(updatedCity);
+    return citySchemas.SingleOutput.parse(cityNew);
   },
 
   deleteById: async (IdInput: any) => {
     const idInput = citySchemas.IdInput.parse(IdInput);
 
-    const city = await prisma.city.delete({
+    const cityOld = await prisma.city.delete({
       where: {
         Id: idInput.Id,
       },
     });
 
-    return citySchemas.SingleOutput.parse(city);
+    return citySchemas.SingleOutput.parse(cityOld);
   },
 };
