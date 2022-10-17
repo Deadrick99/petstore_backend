@@ -35,14 +35,14 @@ export const customerService = {
     const idInput = customerSchemas.IdInput.parse(IdInput);
     const customerData = customerSchemas.SinglePartialInput.parse(customerDataInput);
 
-    const updatedCustomer = await prisma.customer.update({
+    const customerNew = await prisma.customer.update({
       where: {
         Id: idInput.Id,
       },
       data: customerData,
     });
 
-    return customerSchemas.SingleOutput.parse(updatedCustomer);
+    return customerSchemas.SingleOutput.parse(customerNew);
   },
 
   deleteById: async (IdInput: any) => {

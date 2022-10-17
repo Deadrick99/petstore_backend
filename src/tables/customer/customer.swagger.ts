@@ -6,7 +6,7 @@ export const customerSwaggerRouteInfos = {
     schema: {
       summary: "Create a New Customer",
       description: "Creates a new Customer with given information",
-      tags: ["customer"],
+      tags: ["Customer"],
       body: customerSwaggerDefinitions.SingleInput,
       response: {
         201: customerSwaggerDefinitions.SingleOutput,
@@ -19,7 +19,7 @@ export const customerSwaggerRouteInfos = {
     schema: {
       summary: "Get All Customers",
       description: "Get a list of all Customers",
-      tags: ["customer"],
+      tags: ["Customer"],
       response: {
         200: customerSwaggerDefinitions.ManyOutput,
       },
@@ -31,7 +31,7 @@ export const customerSwaggerRouteInfos = {
     schema: {
       summary: "Get Customers by Id",
       description: "Get the Customer with the given Id",
-      tags: ["customer"],
+      tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,
       response: {
         200: customerSwaggerDefinitions.SingleOutput,
@@ -44,7 +44,7 @@ export const customerSwaggerRouteInfos = {
     schema: {
       summary: "Update Customers by Id",
       description: "Update the data for the Customer with the given Id",
-      tags: ["customer"],
+      tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,
       body: customerSwaggerDefinitions.SinglePartialInput,
       response: {
@@ -58,7 +58,7 @@ export const customerSwaggerRouteInfos = {
     schema: {
       summary: "Delete Customers by Id",
       description: "Delete the Customer with the given Id",
-      tags: ["customer"],
+      tags: ["Customer"],
       params: customerSwaggerDefinitions.IdInput,
       response: {
         200: customerSwaggerDefinitions.SingleOutput,

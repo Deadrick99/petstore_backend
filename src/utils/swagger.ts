@@ -13,8 +13,8 @@ export const swagger_info = {
     consumes: ["application/json"],
     produces: ["application/json"],
     tags: [
-      { name: "customer", description: "Customer related end-points" },
-      { name: "city", description: "City related end-points" },
+      { name: "Customer", description: "Customer related end-points" },
+      { name: "City", description: "City related end-points" },
     ],
     definitions: {
       ...citySwaggerDefinitions,

@@ -1,61 +1,59 @@
 import prisma from "../../utils/prisma";
-import {
-  cityIdInputSchema,
-  cityManyOutputSchema,
-  citySingleInputSchema,
-  citySingleOutputSchema,
-  citySinglePartialInputSchema,
-} from "./city.schema";
+import { citySchemas } from "./city.schema";
 
-export async function cityCreate(cityDataInput: any) {
-  const cityData = citySingleInputSchema.parse(cityDataInput);
+export const cityService = {
+  create: async (cityDataInput: any) => {
+    const cityData = citySchemas.SingleInput.parse(cityDataInput);
 
-  const city = await prisma.city.create({
-    data: cityData,
-  });
+    const city = await prisma.city.create({
+      data: cityData,
+    });
 
-  return citySingleOutputSchema.parse(city);
-}
+    return citySchemas.SingleOutput.parse(city);
+  },
 
-export async function cityGetAll() {
-  const cityList = await prisma.city.findMany();
-  return cityManyOutputSchema.parse(cityList);
-}
+  getAll: async () => {
+    const cityList = await prisma.city.findMany();
+    return citySchemas.ManyOutput.parse(cityList);
+  },
 
-export async function cityGetById(IdInput: any) {
-  const idInput = cityIdInputSchema.parse(IdInput);
+  getById: async (IdInput: any) => {
+    const idInput = citySchemas.IdInput.parse(IdInput);
 
-  const city = await prisma.city.findUniqueOrThrow({
-    where: {
-      Id: idInput.Id,
-    },
-  });
+    const city = await prisma.city.findUniqueOrThrow({
+      where: {
+        Id: idInput.Id,
+      },
+    });
 
-  return citySingleOutputSchema.parse(city);
-}
+    console.log(city);
 
-export async function cityUpdateById(IdInput: any, cityDataInput: any) {
-  const idInput = cityIdInputSchema.parse(IdInput);
-  const cityData = citySinglePartialInputSchema.parse(cityDataInput);
+    return citySchemas.SingleOutput.parse(city);
+  },
 
-  const updatedCity = await prisma.city.update({
-    where: {
-      Id: idInput.Id,
-    },
-    data: cityData,
-  });
+  updateById: async (IdInput: any, cityDataInput: any) => {
+    const idInput = citySchemas.IdInput.parse(IdInput);
+    const cityData = citySchemas.SinglePartialInput.parse(cityDataInput);
 
-  return citySingleOutputSchema.parse(updatedCity);
-}
+    const updatedCity = await prisma.city.update({
+      where: {
+        Id: idInput.Id,
+      },
+      data: cityData,
+    });
 
-export async function cityDeleteById(IdInput: any) {
-  const idInput = cityIdInputSchema.parse(IdInput);
+    return citySchemas.SingleOutput.parse(updatedCity);
+  },
 
-  const city = await prisma.city.delete({
-    where: {
-      Id: idInput.Id,
-    },
-  });
+  deleteById: async (IdInput: any) => {
+    const idInput = citySchemas.IdInput.parse(IdInput);
 
-  return citySingleOutputSchema.parse(city);
-}
+    const city = await prisma.city.delete({
+      where: {
+        Id: idInput.Id,
+      },
+    });
+
+    return citySchemas.SingleOutput.parse(city);
+  },
+};

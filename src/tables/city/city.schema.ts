@@ -1,60 +1,85 @@
 import { z } from "zod";
 import { zodTypes } from "../../utils/zod";
-import { generateSchema } from "@anatine/zod-openapi";
+import { extendApi, generateSchema } from "@anatine/zod-openapi";
 
 const cityInputCore = {
-  Name: zodTypes.STR_NON_EMPTY(),
-  State: zodTypes.STR_NON_EMPTY().length(2, "This field must be a two-letter abbreviation for a state"),
-  Country: zodTypes
-    .STR_NON_EMPTY()
-    .min(2, "This field must be a 2 or 3 letter abbreviation for the country")
-    .max(3, "This field must be a 2 or 3 letter abbreviation for the country"),
-  ZipCode: zodTypes.ZIP_CODE_STR(),
-  AreaCode: zodTypes.NUM_STR().nullable().optional(),
-  Latitude: zodTypes.NUM().nullable().optional(),
-  Longitude: zodTypes.NUM().nullable().optional(),
-  Population1980: zodTypes.INT().nullable().optional(),
-  Population1990: zodTypes.INT().nullable().optional(),
+  Name: extendApi(zodTypes.STR_NON_EMPTY(), { example: "Albuquerque" }),
+  State: extendApi(zodTypes.STR_NON_EMPTY().length(2, "State must be the two letter abbreviation for the State name"), {
+    example: "NM",
+  }),
+  Country: extendApi(
+    zodTypes
+      .STR_NON_EMPTY()
+      .min(2, "Country must be the two or three letter abbreviation for the Country name")
+      .max(3, "Country must be the two or three letter abbreviation for the Country name"),
+    { example: "USA" }
+  ),
+  ZipCode: extendApi(zodTypes.ZIP_CODE_STR().nullable().optional(), { example: "87101" }),
+  AreaCode: extendApi(
+    zodTypes
+      .STR_NON_EMPTY()
+      .regex(/^\d{3}$/, "Must be a valid three digit Area Code")
+      .nullable()
+      .optional(),
+    { example: "123" }
+  ),
+  Latitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 35.0844 }),
+  Longitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 106.6504 }),
+  Population1980: extendApi(zodTypes.INT().nullable().optional(), { example: 420000 }),
+  Population1990: extendApi(zodTypes.INT().nullable().optional(), { example: 499000 }),
 };
 
 const cityOutputCore = {
-  Name: zodTypes.STR().nullable().optional(),
-  State: zodTypes.STR().nullable().optional(),
-  Country: zodTypes.STR().nullable().optional(),
-  ZipCode: zodTypes.STR().nullable().optional(),
-  AreaCode: zodTypes.STR().nullable().optional(),
-  Latitude: zodTypes.NUM().nullable().optional(),
-  Longitude: zodTypes.NUM().nullable().optional(),
-  Population1980: zodTypes.INT().nullable().optional(),
-  Population1990: zodTypes.INT().nullable().optional(),
+  Name: extendApi(zodTypes.STR().nullable().optional(), { example: "Albuquerque" }),
+  State: extendApi(zodTypes.STR().nullable().optional(), { example: "NM" }),
+  Country: extendApi(zodTypes.STR().nullable().optional(), { example: "USA" }),
+  ZipCode: extendApi(zodTypes.STR().nullable().optional(), { example: "87101" }),
+  AreaCode: extendApi(zodTypes.STR().nullable().optional(), { example: "123" }),
+  Latitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 35.0844 }),
+  Longitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 106.6504 }),
+  Population1980: extendApi(zodTypes.INT().nullable().optional(), { example: 420000 }),
+  Population1990: extendApi(zodTypes.INT().nullable().optional(), { example: 499000 }),
 };
 
-export const citySingleInputSchema = z.object(
-  { ...cityInputCore },
-  { required_error: "This endpoint requires a JSON object payload" }
+const citySingleInputSchema = extendApi(
+  z.object({ ...cityInputCore }, { required_error: "This endpoint requires a JSON object payload" })
 );
-export type citySingleInputModel = z.infer<typeof citySingleInputSchema>;
 
-export const citySinglePartialInputSchema = citySingleInputSchema.partial();
-export type citySinglePartialInputModel = z.infer<typeof citySinglePartialInputSchema>;
+const citySinglePartialInputSchema = citySingleInputSchema.partial();
 
-export const citySingleOutputSchema = z.object({ Id: zodTypes.INT(), ...cityOutputCore });
-export type citySingleOutputModel = z.infer<typeof citySingleOutputSchema>;
+const citySingleOutputSchema = z.object({
+  Id: extendApi(zodTypes.INT(), { example: "1", description: "A number uniquely identifying the City" }),
+  ...cityOutputCore,
+});
 
-export const cityManyOutputSchema = z.array(citySingleOutputSchema);
-export type cityManyOutputModel = z.infer<typeof cityManyOutputSchema>;
+const cityManyOutputSchema = z.array(citySingleOutputSchema);
 
-export const cityIdInputSchema = z.object({
-  Id: zodTypes.INT_STR().transform((str) => {
+const cityIdInputSchema = z.object({
+  Id: extendApi(zodTypes.INT_STR(), {
+    description: "A number (as a string) uniquely identifying the City",
+  }).transform((str) => {
     return parseInt(str);
   }),
 });
+
+export type citySingleInputModel = z.infer<typeof citySingleInputSchema>;
+export type citySinglePartialInputModel = z.infer<typeof citySinglePartialInputSchema>;
+export type citySingleOutputModel = z.infer<typeof citySingleOutputSchema>;
+export type cityManyOutputModel = z.infer<typeof cityManyOutputSchema>;
 export type cityIdInputModel = z.infer<typeof cityIdInputSchema>;
 
+export const citySchemas = {
+  SingleInput: citySingleInputSchema,
+  SinglePartialInput: citySinglePartialInputSchema,
+  SingleOutput: citySingleOutputSchema,
+  ManyOutput: cityManyOutputSchema,
+  IdInput: cityIdInputSchema,
+};
+
 export const citySwaggerDefinitions = {
-  citySingleInput: generateSchema(citySingleInputSchema),
-  citySinglePartialInput: generateSchema(citySinglePartialInputSchema),
-  citySingleOutput: generateSchema(citySingleOutputSchema),
-  cityManyOutput: generateSchema(cityManyOutputSchema),
-  cityIdInput: generateSchema(cityIdInputSchema),
+  SingleInput: generateSchema(citySingleInputSchema),
+  SinglePartialInput: generateSchema(citySinglePartialInputSchema),
+  SingleOutput: generateSchema(citySingleOutputSchema),
+  ManyOutput: generateSchema(cityManyOutputSchema),
+  IdInput: generateSchema(cityIdInputSchema),
 };

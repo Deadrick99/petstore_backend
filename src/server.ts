@@ -7,7 +7,6 @@ import * as dotenv from "dotenv";
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
 import { swagger_info, swagger_ui_info } from "./utils/swagger";
-import { customerSwaggerDefinitions } from "./tables/customer/customer.schema";
 
 const server: FastifyInstance = fastify();
 

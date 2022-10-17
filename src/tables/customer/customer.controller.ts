@@ -5,8 +5,8 @@ import { customerService } from "./customer.service";
 export const customerHandlers = {
   create: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const newCustomer = await customerService.create(request.body);
-      return reply.code(201).send(newCustomer);
+      const customerNew = await customerService.create(request.body);
+      return reply.code(201).send(customerNew);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -14,8 +14,8 @@ export const customerHandlers = {
 
   getAll: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const customers = await customerService.getAll();
-      return reply.code(200).send(customers);
+      const customerList = await customerService.getAll();
+      return reply.code(200).send(customerList);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -32,8 +32,8 @@ export const customerHandlers = {
 
   updateById: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const updatedCustomer = await customerService.updateById(request.params, request.body);
-      return reply.code(200).send(updatedCustomer);
+      const customerNew = await customerService.updateById(request.params, request.body);
+      return reply.code(200).send(customerNew);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
@@ -41,8 +41,8 @@ export const customerHandlers = {
 
   deleteById: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const deletedCustomer = await customerService.deleteById(request.params);
-      return reply.code(200).send(deletedCustomer);
+      const customerOld = await customerService.deleteById(request.params);
+      return reply.code(200).send(customerOld);
     } catch (error: any) {
       return formatErrors(error, request, reply);
     }
