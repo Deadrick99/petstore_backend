@@ -1,30 +1,32 @@
 import fastify, { FastifyInstance } from "fastify";
 import cors from "@fastify/cors";
+import swagger from "@fastify/swagger";
+import swagger_ui from "@fastify/swagger-ui";
 import * as dotenv from "dotenv";
 
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
-
-import { customerSchemas } from "./tables/customer/customer.schema";
+import { swagger_info, swagger_ui_info } from "./utils/swagger";
+import { customerSwaggerDefinitions } from "./tables/customer/customer.schema";
 
 const server: FastifyInstance = fastify();
 
 main();
 
-function main() {
+async function main() {
   try {
-    setupServer();
-    setServerRoutes();
-    serverRun();
+    await setupServer();
+    await setServerRoutes();
+    await serverRun();
   } catch (e: any) {
     console.error(e.message || e || "Unknown Error");
     process.exit(1);
   }
 }
 
-function setupServer() {
-  setupCors();
-  setupSchemas();
+async function setupServer() {
+  await setupCors();
+  await setupSwagger();
 }
 
 async function setupCors() {
@@ -33,10 +35,9 @@ async function setupCors() {
   });
 }
 
-function setupSchemas() {
-  for (const schema of customerSchemas) {
-    server.addSchema(schema);
-  }
+async function setupSwagger() {
+  await server.register(swagger, swagger_info);
+  await server.register(swagger_ui, swagger_ui_info);
 }
 
 function extractServerOptions(): { port: number; host: string } {

@@ -2,7 +2,7 @@ import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify";
 import { ZodError } from "zod";
 
-export function formatErrors(request: FastifyRequest, reply: FastifyReply, error: any) {
+export function formatErrors(error: any, request: FastifyRequest, reply: FastifyReply) {
   console.log(error);
 
   if (error instanceof ZodError) {

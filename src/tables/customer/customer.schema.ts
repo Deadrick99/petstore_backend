@@ -1,51 +1,63 @@
 import { z } from "zod";
 import { zodTypes } from "../../utils/zod";
-import { buildJsonSchemas } from "fastify-zod";
+import { extendApi, generateSchema } from "@anatine/zod-openapi";
 
 const customerInputCore = {
-  FirstName: zodTypes.STR_NON_EMPTY,
-  LastName: zodTypes.STR_NON_EMPTY,
-  Phone: zodTypes.PHONE_STR.nullable().optional(),
-  Address: zodTypes.STR.nullable().optional(),
-  ZipCode: zodTypes.ZIP_CODE_STR.nullable().optional(),
-  CityId: zodTypes.INT.nullable().optional(),
+  FirstName: extendApi(zodTypes.STR_NON_EMPTY(), { example: "John" }),
+  LastName: extendApi(zodTypes.STR_NON_EMPTY(), { example: "Doe" }),
+  Phone: extendApi(zodTypes.PHONE_STR().nullable().optional(), {
+    example: "(123) 456-7890",
+    examples: ["123 4567", "(123) 456 7890"],
+    description: "US phone numbers only",
+  }),
+  Address: extendApi(zodTypes.STR_NON_EMPTY().nullable().optional(), { example: "123 Main St." }),
+  ZipCode: zodTypes.ZIP_CODE_STR().nullable().optional(),
+  CityId: zodTypes.INT().nullable().optional(),
 };
 
 const customerOutputCore = {
-  FirstName: zodTypes.STR.nullable().optional(),
-  LastName: zodTypes.STR.nullable().optional(),
-  Phone: zodTypes.STR.nullable().optional(),
-  Address: zodTypes.STR.nullable().optional(),
-  ZipCode: zodTypes.STR.nullable().optional(),
-  CityId: zodTypes.INT.nullable().optional(),
+  FirstName: extendApi(zodTypes.STR().nullable().optional(), { example: "John" }),
+  LastName: extendApi(zodTypes.STR().nullable().optional(), { example: "Doe" }),
+  Phone: extendApi(zodTypes.STR().nullable().optional(), { example: "123 4567" }),
+  Address: extendApi(zodTypes.STR().nullable().optional(), { example: "123 Main St." }),
+  ZipCode: extendApi(zodTypes.STR().nullable().optional(), { example: "12345" }),
+  CityId: zodTypes.INT().nullable().optional(),
 };
 
-export const customerSingleInputSchema = z.object(
-  { ...customerInputCore },
-  { required_error: "This endpoint requires a JSON object payload" }
+const customerSingleInputSchema = extendApi(
+  z.object({ ...customerInputCore }, { required_error: "This endpoint requires a JSON object payload" })
 );
-export type customerSingleInputModel = z.infer<typeof customerSingleInputSchema>;
 
-export const customerSinglePartialInputSchema = customerSingleInputSchema.partial();
-export type customerSinglePartialInputModel = z.infer<typeof customerSinglePartialInputSchema>;
+const customerSinglePartialInputSchema = customerSingleInputSchema.partial();
 
-export const customerSingleOutputSchema = z.object({ Id: zodTypes.INT, ...customerOutputCore });
-export type customerSingleOutputModel = z.infer<typeof customerSingleOutputSchema>;
+const customerSingleOutputSchema = z.object({ Id: zodTypes.INT(), ...customerOutputCore });
 
-export const customerManyOutputSchema = z.array(customerSingleOutputSchema);
-export type customerManyOutputModel = z.infer<typeof customerManyOutputSchema>;
+const customerManyOutputSchema = z.array(customerSingleOutputSchema);
 
-export const customerIdInputSchema = z.object({
-  Id: zodTypes.INT_STR.transform((str) => {
+const customerIdInputSchema = z.object({
+  Id: zodTypes.INT_STR().transform((str) => {
     return parseInt(str);
   }),
 });
+
+export type customerSingleInputModel = z.infer<typeof customerSingleInputSchema>;
+export type customerSinglePartialInputModel = z.infer<typeof customerSinglePartialInputSchema>;
+export type customerSingleOutputModel = z.infer<typeof customerSingleOutputSchema>;
+export type customerManyOutputModel = z.infer<typeof customerManyOutputSchema>;
 export type customerIdInputModel = z.infer<typeof customerIdInputSchema>;
 
-export const { schemas: customerSchemas, $ref } = buildJsonSchemas({
-  customerSingleInputSchema,
-  customerSinglePartialInputSchema,
-  customerSingleOutputSchema,
-  customerManyOutputSchema,
-  customerIdInputSchema,
-});
+export const customerSchemas = {
+  SingleInput: customerSingleInputSchema,
+  SinglePartialInput: customerSinglePartialInputSchema,
+  SingleOutput: customerSingleOutputSchema,
+  ManyOutput: customerManyOutputSchema,
+  IdInput: customerIdInputSchema,
+};
+
+export const customerSwaggerDefinitions = {
+  SingleInput: generateSchema(customerSingleInputSchema),
+  SinglePartialInput: generateSchema(customerSinglePartialInputSchema),
+  SingleOutput: generateSchema(customerSingleOutputSchema),
+  ManyOutput: generateSchema(customerManyOutputSchema),
+  IdInput: generateSchema(customerIdInputSchema),
+};

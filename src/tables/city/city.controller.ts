@@ -7,7 +7,7 @@ export async function cityCreateHandler(request: FastifyRequest, reply: FastifyR
     const newCity = await cityCreate(request.body);
     return reply.code(201).send(newCity);
   } catch (error: any) {
-    return formatErrors(request, reply, error);
+    return formatErrors(error, request, reply);
   }
 }
 
@@ -16,7 +16,7 @@ export async function cityGetAllHandler(request: FastifyRequest, reply: FastifyR
     const cities = await cityGetAll();
     return reply.code(200).send(cities);
   } catch (error: any) {
-    return formatErrors(request, reply, error);
+    return formatErrors(error, request, reply);
   }
 }
 
@@ -25,7 +25,7 @@ export async function cityGetByIdHandler(request: FastifyRequest, reply: Fastify
     const city = await cityGetById(request.params);
     return reply.code(200).send(city);
   } catch (error: any) {
-    return formatErrors(request, reply, error);
+    return formatErrors(error, request, reply);
   }
 }
 
@@ -34,7 +34,7 @@ export async function cityUpdateByIdHandler(request: FastifyRequest, reply: Fast
     const updatedCity = await cityUpdateById(request.params, request.body);
     return reply.code(200).send(updatedCity);
   } catch (error: any) {
-    return formatErrors(request, reply, error);
+    return formatErrors(error, request, reply);
   }
 }
 
@@ -43,6 +43,6 @@ export async function cityDeleteByIdHandler(request: FastifyRequest, reply: Fast
     const deletedCity = await cityDeleteById(request.params);
     return reply.code(200).send(deletedCity);
   } catch (error: any) {
-    return formatErrors(request, reply, error);
+    return formatErrors(error, request, reply);
   }
 }

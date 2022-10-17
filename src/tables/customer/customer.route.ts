@@ -1,78 +1,13 @@
 import { FastifyInstance } from "fastify";
-import {
-  customerCreateHandler,
-  customerDeleteByIdHandler,
-  customerGetAllHandler,
-  customerGetByIdHandler,
-  customerUpdateByIdHandler,
-} from "./customer.controller";
-import { $ref } from "./customer.schema";
+import { customerHandlers } from "./customer.controller";
+import { customerSwaggerRouteInfos } from "./customer.swagger";
 
 async function customerRoutes(server: FastifyInstance) {
-  server.get(
-    "/",
-    {
-      schema: {
-        response: {
-          200: $ref("customerManyOutputSchema"),
-        },
-      },
-    },
-    customerGetAllHandler
-  );
-
-  server.get(
-    "/:Id",
-    {
-      schema: {
-        params: $ref("customerIdInputSchema"),
-        response: {
-          200: $ref("customerSingleOutputSchema"),
-        },
-      },
-    },
-    customerGetByIdHandler
-  );
-
-  server.post(
-    "/",
-    {
-      schema: {
-        body: $ref("customerSingleInputSchema"),
-        response: {
-          201: $ref("customerSingleOutputSchema"),
-        },
-      },
-    },
-    customerCreateHandler
-  );
-
-  server.patch(
-    "/:Id",
-    {
-      schema: {
-        params: $ref("customerIdInputSchema"),
-        body: $ref("customerSinglePartialInputSchema"),
-        response: {
-          200: $ref("customerSingleOutputSchema"),
-        },
-      },
-    },
-    customerUpdateByIdHandler
-  );
-
-  server.delete(
-    "/:Id",
-    {
-      schema: {
-        params: $ref("customerIdInputSchema"),
-        response: {
-          200: $ref("customerSingleOutputSchema"),
-        },
-      },
-    },
-    customerDeleteByIdHandler
-  );
+  server.get("/", customerSwaggerRouteInfos.getAll, customerHandlers.getAll);
+  server.get("/:Id", customerSwaggerRouteInfos.getById, customerHandlers.getById);
+  server.post("/", customerSwaggerRouteInfos.create, customerHandlers.create);
+  server.patch("/:Id", customerSwaggerRouteInfos.UpdateById, customerHandlers.updateById);
+  server.delete("/:Id", customerSwaggerRouteInfos.DeleteById, customerHandlers.deleteById);
 }
 
 export default customerRoutes;
