@@ -30,12 +30,17 @@ const customerSingleInputSchema = extendApi(
 
 const customerSinglePartialInputSchema = customerSingleInputSchema.partial();
 
-const customerSingleOutputSchema = z.object({ Id: zodTypes.INT(), ...customerOutputCore });
+const customerSingleOutputSchema = z.object({
+  Id: extendApi(zodTypes.INT(), { example: "1", description: "A number uniquely identifying the Customer" }),
+  ...customerOutputCore,
+});
 
 const customerManyOutputSchema = z.array(customerSingleOutputSchema);
 
 const customerIdInputSchema = z.object({
-  Id: zodTypes.INT_STR().transform((str) => {
+  Id: extendApi(zodTypes.INT_STR(), {
+    description: "A number (as a string) uniquely identifying the Customer",
+  }).transform((str) => {
     return parseInt(str);
   }),
 });
