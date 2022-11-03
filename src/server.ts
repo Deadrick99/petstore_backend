@@ -10,6 +10,7 @@ import cityRoutes from "./tables/city/city.route";
 import animalRoutes from "./tables/animal/animal.route";
 import categoryRoutes from "./tables/category/category.route";
 import merchandiseRoutes from "./tables/merchandise/merchandise.route";
+import breedRoutes from "./tables/breed/breed.route";
 
 export function createFastifyServer(opts: FastifyServerOptions = {}) {
   const server: FastifyInstance = fastify(opts);
@@ -43,9 +44,10 @@ function setServerRoutes(server: FastifyInstance) {
   });
 
   // CRUD endpoints
-  server.register(customerRoutes, { prefix: "/api/customers" });
+  server.register(animalRoutes, { prefix: "/api/animals" });
+  server.register(breedRoutes, { prefix: "/api/breeds" });
   server.register(categoryRoutes, { prefix: "/api/categories" });
   server.register(cityRoutes, { prefix: "/api/cities" });
-  server.register(animalRoutes, { prefix: "/api/animals" });
+  server.register(customerRoutes, { prefix: "/api/customers" });
   server.register(merchandiseRoutes, { prefix: "/api/merchandise" });
 }

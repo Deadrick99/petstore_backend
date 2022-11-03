@@ -14,6 +14,7 @@ export const swagger_info = {
     produces: ["application/json"],
     tags: [
       { name: "Animal", description: "Animal related end-points" },
+      { name: "Breed", description: "Breed related end-points" },
       { name: "Category", description: "Category related end-points" },
       { name: "Customer", description: "Customer related end-points" },
       { name: "City", description: "City related end-points" },
