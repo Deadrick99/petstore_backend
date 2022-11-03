@@ -21,7 +21,7 @@ const cityInputCore = {
       .regex(/^\d{3}$/, "This must be a valid three digit Area Code")
       .nullable()
       .optional(),
-    { example: "123" }
+    { example: "505" }
   ),
   Latitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 35.0844 }),
   Longitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 106.6504 }),
@@ -34,7 +34,7 @@ const cityOutputCore = {
   State: extendApi(zodTypes.STR().nullable().optional(), { example: "NM" }),
   Country: extendApi(zodTypes.STR().nullable().optional(), { example: "USA" }),
   ZipCode: extendApi(zodTypes.STR().nullable().optional(), { example: "87101" }),
-  AreaCode: extendApi(zodTypes.STR().nullable().optional(), { example: "123" }),
+  AreaCode: extendApi(zodTypes.STR().nullable().optional(), { example: "505" }),
   Latitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 35.0844 }),
   Longitude: extendApi(zodTypes.NUM().nullable().optional(), { example: 106.6504 }),
   Population1980: extendApi(zodTypes.INT().nullable().optional(), { example: 420000 }),

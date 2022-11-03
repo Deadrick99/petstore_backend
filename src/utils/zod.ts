@@ -13,7 +13,7 @@ export const STR = () => {
 };
 
 export const STR_NON_EMPTY = () => {
-  return STR().min(1, { message: "This must not be empty" });
+  return STR().min(1, { message: "This must not be an empty string" });
 };
 
 export const NUM = () => {

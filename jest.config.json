@@ -1,0 +1,6 @@
+{
+  "testRegex": "(/__tests__/.*|(\\.|/)(tests?|spec))\\.[jt]sx?$",
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  }
+}
