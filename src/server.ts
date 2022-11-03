@@ -8,6 +8,7 @@ import { swagger_info, swagger_ui_info } from "./utils/swagger";
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
 import animalRoutes from "./tables/animal/animal.route";
+import categoryRoutes from "./tables/category/category.route";
 
 export function createFastifyServer(opts: FastifyServerOptions = {}) {
   const server: FastifyInstance = fastify(opts);
@@ -44,4 +45,5 @@ function setServerRoutes(server: FastifyInstance) {
   server.register(customerRoutes, { prefix: "/api/customers" });
   server.register(cityRoutes, { prefix: "/api/cities" });
   server.register(animalRoutes, { prefix: "/api/animals" });
+  server.register(categoryRoutes, { prefix: "/api/categories" });
 }
