@@ -6,7 +6,9 @@
   "scripts": {
     "init": "npm i && npx prisma generate",
     "dev": "ts-node-dev --rs --respawn --clear --transpile-only --exit-child ./src/app.ts",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --collect-coverage",
     "build": "tsc",
     "start": "node ./build/app.js"
   },

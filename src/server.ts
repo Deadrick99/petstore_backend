@@ -2,7 +2,7 @@ import fastify, { FastifyInstance, FastifyServerOptions } from "fastify";
 import cors from "@fastify/cors";
 import swagger from "@fastify/swagger";
 import swagger_ui from "@fastify/swagger-ui";
-
+import * as dotenv from "dotenv";
 import { swagger_info, swagger_ui_info } from "./utils/swagger";
 
 import customerRoutes from "./tables/customer/customer.route";
@@ -11,9 +11,12 @@ import animalRoutes from "./tables/animal/animal.route";
 import categoryRoutes from "./tables/category/category.route";
 import merchandiseRoutes from "./tables/merchandise/merchandise.route";
 import breedRoutes from "./tables/breed/breed.route";
+import { setPrismaSrc } from "./utils/prisma";
 
-export function createFastifyServer(opts: FastifyServerOptions = {}) {
-  const server: FastifyInstance = fastify(opts);
+export function createFastifyServer(mode: "production" | "testing" = "production") {
+  setPrismaSrc(mode);
+
+  const server: FastifyInstance = fastify();
 
   setupServer(server);
 
