@@ -5,6 +5,7 @@ import { customerService } from "./customer.service";
 export const customerHandlers = {
   create: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
+      console.log(request.body);
       const customerNew = await customerService.create(request.body);
       return reply.code(201).send(customerNew);
     } catch (error: any) {
