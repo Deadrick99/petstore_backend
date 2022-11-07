@@ -4,6 +4,7 @@ import swagger from "@fastify/swagger";
 import swagger_ui from "@fastify/swagger-ui";
 import * as dotenv from "dotenv";
 import { swagger_info, swagger_ui_info } from "./utils/swagger";
+import storage from "node-persist";
 
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
@@ -15,33 +16,25 @@ import merchandiseRoutes from "./tables/merchandise/merchandise.route";
 import breedRoutes from "./tables/breed/breed.route";
 import { setPrismaSrc } from "./utils/prisma";
 
-export function createFastifyServer(mode: "production" | "testing" = "production") {
+export function createFastifyServer(mode: "production" | "testing" = "production"): FastifyInstance {
   setPrismaSrc(mode);
 
-const server: FastifyInstance = fastify();
+  const server: FastifyInstance = fastify();
 
-server.addContentTypeParser('text/json', { parseAs: 'string' }, server.getDefaultJsonParser('ignore', 'ignore'));
+  server.addContentTypeParser("text/json", { parseAs: "string" }, server.getDefaultJsonParser("ignore", "ignore"));
 
   setupServer(server);
 
-async function main() {
-  try {
-    setupServer();
-    setupStorage();
-    setLoginRoutes();
-    setServerRoutes();
-    setSignupRoutes();
-    serverRun();
-  } catch (e: any) {
-    console.error(e.message || e || "Unknown Error");
-    process.exit(1);
-  }
+  return server;
 }
 
 function setupServer(server: FastifyInstance) {
   setupCors(server);
   setupSwagger(server);
   setServerRoutes(server);
+  // setSignupRoutes(server);
+  // setLoginRoutes(server);
+  // setupStorage();
 }
 
 function setupCors(server: FastifyInstance) {
@@ -67,47 +60,40 @@ function setServerRoutes(server: FastifyInstance) {
   server.register(categoryRoutes, { prefix: "/api/categories" });
   server.register(cityRoutes, { prefix: "/api/cities" });
   server.register(customerRoutes, { prefix: "/api/customers" });
-  server.register(cityRoutes, { prefix: "/api/cities" });
-}
-
-async function serverRun() {
-  const server_options = extractServerOptions();
-  await server.listen(server_options);
-
-  console.log(`Server listening on port ${server_options.port} ...`);
+  server.register(merchandiseRoutes, { prefix: "/api/merchandise" });
 }
 
 /**
  * Login and Signup Functions
  */
-function setupStorage() {  
-  storage.init({ dir: './.storage'});
+
+/*
+function setupStorage() {
+  storage.init({ dir: "./.storage" });
 }
 
-
-async function setLoginRoutes() {
-  server.post('/api/login', async (req: FastifyRequest, reply: FastifyReply) => {
-    
-    let data = { email: '', password: '' };
+async function setLoginRoutes(server: FastifyInstance) {
+  server.post("/api/login", async (req: FastifyRequest, reply: FastifyReply) => {
+    let data = { email: "", password: "" };
 
     try {
       data = authSchema.parse(req.body);
-    } catch(error) {
-      return formatErrors(req, reply, error);
+    } catch (error) {
+      return formatErrors(error, req, reply);
     }
 
-    let accounts = storage.keys();
+    let accounts = await storage.keys();
 
     if (!accounts.includes(data.email)) {
-      reply.code(400).send('An account associated with this email was not found.');
+      reply.code(400).send("An account associated with this email was not found.");
       return;
     }
 
-    let account = await storage.getItem(data.email)
+    let account = await storage.getItem(data.email);
     let correctPassword = account.password;
 
     if (data.password != correctPassword) {
-      reply.code(400).send('This password is incorrect.');
+      reply.code(400).send("This password is incorrect.");
       return;
     }
 
@@ -115,28 +101,29 @@ async function setLoginRoutes() {
   });
 }
 
-function setSignupRoutes() {
-  server.post('/api/signup', (req: FastifyRequest, reply: FastifyReply) => {
-    let data = { email: '', password: '' };
+function setSignupRoutes(server: FastifyInstance) {
+  server.post("/api/signup", async (req: FastifyRequest, reply: FastifyReply) => {
+    let data = { email: "", password: "" };
 
     try {
       data = authSchema.parse(req.body);
-    } catch(error) {
-      return formatErrors(req, reply, error);
+    } catch (error) {
+      return formatErrors(error, req, reply);
     }
 
-    let accounts = storage.keys();
+    let accounts = await storage.keys();
 
     if (accounts.includes(data.email)) {
-      reply.code(400).send('An account associated with this email already exists.');
+      reply.code(400).send("An account associated with this email already exists.");
       return;
     }
 
     let newAccount = {
-      'password': data.password,
-      'token': uuidv4()
-    }
+      password: data.password,
+      token: uuidv4(),
+    };
     storage.setItem(data.email, newAccount);
-    reply.code(200).send('Successfully created the account.');
+    reply.code(200).send("Successfully created the account.");
   });
 }
+*/
