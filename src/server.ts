@@ -2,7 +2,7 @@ import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 import cors from "@fastify/cors";
 import swagger from "@fastify/swagger";
 import swagger_ui from "@fastify/swagger-ui";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import { swagger_info, swagger_ui_info } from "./utils/swagger";
 import storage from "node-persist";
 
