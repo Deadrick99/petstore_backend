@@ -32,9 +32,9 @@ function setupServer(server: FastifyInstance) {
   setupCors(server);
   setupSwagger(server);
   setServerRoutes(server);
-  // setSignupRoutes(server);
-  // setLoginRoutes(server);
-  // setupStorage();
+  setSignupRoutes(server);
+  setLoginRoutes(server);
+  setupStorage();
 }
 
 function setupCors(server: FastifyInstance) {
@@ -67,7 +67,7 @@ function setServerRoutes(server: FastifyInstance) {
  * Login and Signup Functions
  */
 
-/*
+
 function setupStorage() {
   storage.init({ dir: "./.storage" });
 }
@@ -126,4 +126,4 @@ function setSignupRoutes(server: FastifyInstance) {
     reply.code(200).send("Successfully created the account.");
   });
 }
-*/
+
