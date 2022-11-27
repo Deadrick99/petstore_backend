@@ -39,7 +39,7 @@ function setupServer(server: FastifyInstance) {
 
 function setupCors(server: FastifyInstance) {
   server.register(cors, {
-    origin: ["localhost"],
+    origin: ["*"],
   });
 }
 
@@ -120,7 +120,7 @@ function setSignupRoutes(server: FastifyInstance) {
 
     let newAccount = {
       password: data.password,
-      token: uuidv4(),
+      token: uidv4(),
     };
     storage.setItem(data.email, newAccount);
     reply.code(200).send("Successfully created the account.");
