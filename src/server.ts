@@ -5,7 +5,7 @@ import swagger_ui from "@fastify/swagger-ui";
 import dotenv from "dotenv";
 import { swagger_info, swagger_ui_info } from "./utils/swagger";
 import storage from "node-persist";
-
+import { v4 as uuidv4 } from 'uuid';
 import customerRoutes from "./tables/customer/customer.route";
 import cityRoutes from "./tables/city/city.route";
 import authSchema from "./utils/schemas";
@@ -120,10 +120,11 @@ function setSignupRoutes(server: FastifyInstance) {
 
     let newAccount = {
       password: data.password,
-      token: uidv4(),
+      token: uuidv4(),
     };
     storage.setItem(data.email, newAccount);
     reply.code(200).send("Successfully created the account.");
   });
 }
+
 
