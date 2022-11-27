@@ -25,6 +25,7 @@ model Animal {
   Breed_AnimalToBreed       Breed?            @relation(fields: [Category, Breed], references: [Category, Breed], onDelete: Cascade, onUpdate: NoAction)
   AnimalOrderItem           AnimalOrderItem[]
   SaleAnimal                SaleAnimal[]
+  Adoption                  Adoption[]
 
   @@index([Category, Breed], map: "idx_FK_Animal_Breed")
 }
@@ -241,4 +242,20 @@ model Supplier {
   MerchandiseOrder MerchandiseOrder[]
 
   @@index([CityId], map: "idx_FK_Supplier_City")
+}
+
+model Adoption {
+  Id            Int     @id @unique(map: "sqlite_autoindex_Adoption_1") @default(autoincrement())
+  FirstName     String?
+  LastName      String?
+  EmailName     String?
+  HomeSize      String?
+  HoursDay      String?
+  Why           String?
+  AnimalId      Int?
+  CustomerEmail String?
+  Approve       String?
+  Animal        Animal? @relation(fields: [AnimalId], references: [Id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([AnimalId], map: "idx_FK_Adoption_Animal")
 }

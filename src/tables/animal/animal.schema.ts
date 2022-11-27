@@ -36,7 +36,7 @@ const animalOutputCore = {
 };
 
 const animalSingleInputSchema = extendApi(
-  z.object({ ...animalInputCore }, { required_error: "This endpoint requires a JSON object payload" })
+  z.object( { ...animalInputCore }, { required_error: "This endpoint requires a JSON object payload" })
 );
 
 const animalSinglePartialInputSchema = animalSingleInputSchema.partial();

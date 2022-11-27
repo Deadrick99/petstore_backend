@@ -15,6 +15,7 @@ import categoryRoutes from "./tables/category/category.route";
 import merchandiseRoutes from "./tables/merchandise/merchandise.route";
 import breedRoutes from "./tables/breed/breed.route";
 import { setPrismaSrc } from "./utils/prisma";
+import adoptionRoutes from "./tables/adoption/adoption.route";
 
 export function createFastifyServer(mode: "production" | "testing" = "production"): FastifyInstance {
   setPrismaSrc(mode);
@@ -61,6 +62,7 @@ function setServerRoutes(server: FastifyInstance) {
   server.register(cityRoutes, { prefix: "/api/cities" });
   server.register(customerRoutes, { prefix: "/api/customers" });
   server.register(merchandiseRoutes, { prefix: "/api/merchandise" });
+  server.register(adoptionRoutes, {prefix: "api/adoption"})
 }
 
 /**
