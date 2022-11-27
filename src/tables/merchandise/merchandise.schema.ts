@@ -39,7 +39,7 @@ const merchandiseSingleOutputSchema = z.object({
 const merchandiseManyOutputSchema = z.array(merchandiseSingleOutputSchema);
 
 const merchandiseIdInputSchema = z.object({
-  Id: extendApi(zodTypes.INT(), {
+  Id: extendApi(z.union([zodTypes.INT(), zodTypes.STR_TO_INT()]), {
     description: "A number uniquely identifying the Merchandise",
   }),
 });

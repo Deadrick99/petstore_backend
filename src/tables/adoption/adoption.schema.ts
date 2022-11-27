@@ -40,7 +40,7 @@ const adoptionSingleOutputSchema = z.object({
 const adoptionManyOutputSchema = z.array(adoptionSingleOutputSchema);
 
 const adoptionIdInputSchema = z.object({
-  Id: extendApi(zodTypes.INT(), {
+  Id: extendApi(z.union([zodTypes.INT(), zodTypes.STR_TO_INT()]), {
     description: "A number uniquely identifying the Animal",
   }),
 });

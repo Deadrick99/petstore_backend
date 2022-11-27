@@ -100,11 +100,17 @@ export const ZIP_CODE_STR = () => {
   );
 };
 
+export const STR_TO_INT = () => {
+  return INT_STR().transform((int_str) => {
+    return parseInt(int_str);
+  });
+};
 export const zodTypes = {
   STR,
   STR_NON_EMPTY,
   INT,
   INT_STR,
+  STR_TO_INT,
   NUM,
   DECIMAL_TO_NUM,
   NUM_STR,
