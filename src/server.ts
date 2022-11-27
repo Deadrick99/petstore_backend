@@ -39,7 +39,7 @@ function setupServer(server: FastifyInstance) {
 
 function setupCors(server: FastifyInstance) {
   server.register(cors, {
-    origin: ["*"],
+    origin: "*",
   });
 }
 
