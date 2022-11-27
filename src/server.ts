@@ -97,7 +97,7 @@ async function setLoginRoutes(server: FastifyInstance) {
       return;
     }
 
-    reply.code(200).send(account.token);
+    reply.code(200).send(account.isAdmin);
   });
 }
 
@@ -121,6 +121,7 @@ function setSignupRoutes(server: FastifyInstance) {
     let newAccount = {
       password: data.password,
       token: uuidv4(),
+      isAdmin: false
     };
     storage.setItem(data.email, newAccount);
     reply.code(200).send("Successfully created the account.");

@@ -1,1 +1,1 @@
-{"key":"admin@petstore.com","value":{"password":"password","token":"e47ff6f3-e15f-424d-9d7b-ba51c49f9b86"}}
+{"key":"admin@petstore.com","value":{"password":"password","token":"e47ff6f3-e15f-424d-9d7b-ba51c49f9b86","isAdmin":"true"}}
